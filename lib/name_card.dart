@@ -21,6 +21,9 @@ class _NameCardState extends State<NameCard> {
 
   @override
   Widget build(BuildContext context) {
+    double height = 400;
+    double badgeDistanceFromBottom = 16;
+    double buttonDistanceFromBottom = 160;
     double width = MediaQuery.of(context).size.width;
     return Stack(
       children: [
@@ -30,14 +33,14 @@ class _NameCardState extends State<NameCard> {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
             width: double.infinity,
-            height: 300,
+            height: height,
             decoration: BoxDecoration(
-              image: const DecorationImage(
-                fit: BoxFit.cover,
-                // colorFilter: ColorFilter.mode(
-                //     Colors.black.withOpacity(0.5), BlendMode.darken),
-                image: AssetImage('assets/images/background.png'),
-              ),
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: Theme.of(context).colorScheme.brightness ==
+                          Brightness.light
+                      ? const AssetImage('assets/images/background-light.jpeg')
+                      : const AssetImage('assets/images/background-dark.jpeg')),
               boxShadow: [
                 BoxShadow(
                   offset: Offset(shadow, shadow),
@@ -51,20 +54,17 @@ class _NameCardState extends State<NameCard> {
             ),
           ),
         ),
-        Container(
-          padding: const EdgeInsets.all(36),
-          width: double.infinity,
-          height: 400,
+        Positioned(
+          top: 36,
+          left: 36,
           child: AnimatedDefaultTextStyle(
             duration: const Duration(milliseconds: 300),
-            child:
-                const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('Hi, I\'m Zhe Wang,'),
-              Text('a Seasoned Artisan in Data Engineering.'),
-              SizedBox(
-                height: 20,
-              ),
-            ]),
+            child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Hi, I\'m Zhe Wang,'),
+                  Text('a Seasoned Artisan in Data Engineering.')
+                ]),
             style: TextStyle(
               fontFamily: 'Bodoni 72 Smallcaps Book',
               fontSize: width * 0.05,
@@ -75,12 +75,12 @@ class _NameCardState extends State<NameCard> {
         ),
         Positioned(
             right: 32,
-            bottom: 200,
+            bottom: buttonDistanceFromBottom,
             child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
               IconButton(
                   icon: SvgPicture.asset('assets/icons/linkedin.svg',
                       colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.tertiary,
+                          Theme.of(context).colorScheme.secondary,
                           BlendMode.srcIn)),
                   onPressed: () {
                     launchUrlString('https://www.linkedin.com/in/zh3w4ng');
@@ -88,7 +88,7 @@ class _NameCardState extends State<NameCard> {
               IconButton(
                   icon: SvgPicture.asset('assets/icons/mail.svg',
                       colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.tertiary,
+                          Theme.of(context).colorScheme.secondary,
                           BlendMode.srcIn)),
                   color: Theme.of(context).colorScheme.tertiary,
                   onPressed: () {
@@ -96,7 +96,7 @@ class _NameCardState extends State<NameCard> {
                   }),
             ])),
         Positioned(
-            bottom: 80,
+            bottom: badgeDistanceFromBottom,
             left: 16,
             child: Container(
                 alignment: Alignment.bottomLeft,

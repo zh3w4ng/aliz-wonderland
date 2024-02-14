@@ -29,6 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  provider: ^6.1.1
   flutter_svg: ^2.0.9
   flutter_svg_provider: ^1.0.7
   url_launcher: ^6.2.3
@@ -97,7 +98,8 @@ flutter:
       fonts:
         - asset: 'assets/fonts/bodoni/Bodoni 72.ttc'
   assets:
-    - assets/images/background.png
+    - assets/images/background-light.jpeg
+    - assets/images/background-dark.jpeg
     - assets/icons/zw-logo.svg
     - assets/icons/linkedin.svg
     - assets/icons/mail.svg
