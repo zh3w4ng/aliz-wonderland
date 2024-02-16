@@ -16,8 +16,6 @@ class _NameCardState extends State<NameCard> {
   double opacity = 1.0;
   Color? textColor;
   bool hover = false;
-  final thresholdshadowColor = const Color.fromRGBO(124, 78, 50, 0.5);
-  final aquaColor = const Color.fromRGBO(32, 68, 80, 1);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +42,7 @@ class _NameCardState extends State<NameCard> {
               boxShadow: [
                 BoxShadow(
                   offset: Offset(shadow, shadow),
-                  color: thresholdshadowColor,
+                  color: Theme.of(context).colorScheme.secondary,
                   blurRadius: shadow,
                 ),
               ],
@@ -57,17 +55,18 @@ class _NameCardState extends State<NameCard> {
         Positioned(
           top: 36,
           left: 36,
+          right: 36,
           child: AnimatedDefaultTextStyle(
             duration: const Duration(milliseconds: 300),
             child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Hi, I\'m Zhe Wang,'),
-                  Text('a Seasoned Artisan in Data Engineering.')
+                  Text('a Seasoned Data Artisan.')
                 ]),
             style: TextStyle(
-              fontFamily: 'Bodoni 72 Smallcaps Book',
-              fontSize: width * 0.05,
+              fontFamily: 'Bodoni 72',
+              fontSize: width * 0.06,
               fontWeight: FontWeight.w800,
               color: Theme.of(context).colorScheme.primary,
             ),

@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  card_swiper:
+    dependency: "direct main"
+    description:
+      name: card_swiper
+      sha256: "21e52a144decbf0054e7cfed8bbe46fc89635e6c86b767eaccfe7d5aeba32528"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   characters:
     dependency: transitive
     description:
@@ -49,6 +57,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  country_icons:
+    dependency: "direct main"
+    description:
+      name: country_icons
+      sha256: "81332bf2513a748f094b97ba9f7214cdeb4396ef6de5e0162c8b0f7a4f940a89"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -86,14 +102,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.9"
-  flutter_svg_provider:
-    dependency: "direct main"
-    description:
-      name: flutter_svg_provider
-      sha256: cda47ab350671ba51ae4605d48f4c82fa5a2c399d22ebda367c1b407234c5048
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.7"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -104,22 +112,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  http:
-    dependency: transitive
-    description:
-      name: http
-      sha256: a2bbf9d017fcced29139daa8ed2bba4ece450ab222871df93ca9eec6f80c34ba
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.0"
-  http_parser:
-    dependency: transitive
-    description:
-      name: http_parser
-      sha256: "2aa08ce0341cc9b354a498388e30986515406668dbcc4f7c950c3e715496693b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.0.2"
   lints:
     dependency: transitive
     description:
@@ -253,14 +245,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
-  typed_data:
-    dependency: transitive
-    description:
-      name: typed_data
-      sha256: facc8d6582f16042dd49f2463ff1bd6e2c9ef9f3d5da3d9b087e244a7b564b3c
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.2"
   url_launcher:
     dependency: "direct main"
     description:
@@ -365,6 +349,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.0"
+  word_cloud:
+    dependency: "direct main"
+    description:
+      name: word_cloud
+      sha256: "72fe356a4534ee24d84d0b2a1dc7f93f5cebf3f909bacd9762569643c835ce74"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   xml:
     dependency: transitive
     description:

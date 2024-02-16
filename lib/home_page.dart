@@ -1,6 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wonderland/name_card.dart';
-import 'package:flutter/material.dart';
+import 'package:wonderland/companies_swiper.dart';
+import 'package:wonderland/tools_word_cloud.dart';
 import 'package:wonderland/theme_mode_provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,8 +36,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // double width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       appBar: AppBar(
         actions: const [SizedBox(width: 40)],
@@ -117,9 +117,17 @@ class _HomePageState extends State<HomePage> {
                 ))),
         Expanded(
             child: Padding(
-                padding: const EdgeInsets.only(left: 24, right: 24),
+                padding: const EdgeInsets.only(left: 48, right: 48),
                 child: ListView(
-                  children: const <Widget>[SizedBox(height: 8), NameCard(), SizedBox(height: 16)],
+                  physics: const BouncingScrollPhysics(),
+                  children: const <Widget>[
+                    SizedBox(height: 8),
+                    NameCard(),
+                    SizedBox(height: 8),
+                    CompaniesSwiper(),
+                    ToolsWordCloud(),
+                    SizedBox(height: 16)
+                  ],
                 )))
       ]),
       floatingActionButton: FloatingActionButton(
