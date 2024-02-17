@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wonderland/typography.dart';
 
 class CompaniesSwiper extends StatelessWidget {
   const CompaniesSwiper({Key? key}) : super(key: key);
@@ -8,8 +9,8 @@ class CompaniesSwiper extends StatelessWidget {
   AnimatedContainer _buildCountryImage(BuildContext context, String code) {
     return AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        width: 20,
-        height: 16,
+        width: TypographyUtil.labelSmall(context).fontSize! * 1.5,
+        height: TypographyUtil.labelSmall(context).fontSize! * 1.25,
         decoration: BoxDecoration(
           image: DecorationImage(
               fit: BoxFit.fill,
@@ -24,7 +25,7 @@ class CompaniesSwiper extends StatelessWidget {
 
   GridTile _buildGridTile(
       BuildContext context, String path, String name, String countryCode) {
-    const double height = 96;
+    const double height = 48;
     return GridTile(
         child: Container(
             alignment: Alignment.center,
@@ -44,15 +45,10 @@ class CompaniesSwiper extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                     _buildCountryImage(context, countryCode),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 4),
                     Text(
                       name,
-                      style: TextStyle(
-                        fontFamily: 'Bodoni 72',
-                        fontSize: 12,
-                        fontWeight: FontWeight.w800,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
+                      style: TypographyUtil.labelSmall(context)
                     )
                   ])),
             ])));
@@ -94,16 +90,11 @@ class CompaniesSwiper extends StatelessWidget {
             alignment: Alignment.topLeft,
             child: Text(
               'Companies',
-              style: TextStyle(
-                fontFamily: 'Bodoni 72 Smallcaps Book',
-                fontSize: 48,
-                fontWeight: FontWeight.w800,
-                color: Theme.of(context).colorScheme.primary,
-              ),
+              style: TypographyUtil.headlineLarge(context)
             )),
         SizedBox(
             width: double.infinity,
-            height: 192,
+            height: 128,
             child: Swiper(
               autoplay: true,
               itemBuilder: (BuildContext context, int index) {

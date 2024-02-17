@@ -4,6 +4,7 @@ import 'package:wonderland/name_card.dart';
 import 'package:wonderland/companies_swiper.dart';
 import 'package:wonderland/tools_word_cloud.dart';
 import 'package:wonderland/theme_mode_provider.dart';
+import 'package:wonderland/typography.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage(
@@ -59,11 +60,7 @@ class _HomePageState extends State<HomePage> {
                 BlendMode.srcATop,
               )),
           const SizedBox(width: 8),
-          Text(widget.title,
-              style: TextStyle(
-                  fontFamily: 'Bodoni 72 Smallcaps Book',
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context).colorScheme.primary))
+          Text(widget.title, style: TypographyUtil.titleLarge(context))
         ]),
       ),
       body: Row(children: <Widget>[
@@ -117,18 +114,20 @@ class _HomePageState extends State<HomePage> {
                 ))),
         Expanded(
             child: Padding(
-                padding: const EdgeInsets.only(left: 48, right: 48),
-                child: ListView(
-                  physics: const BouncingScrollPhysics(),
-                  children: const <Widget>[
-                    SizedBox(height: 8),
-                    NameCard(),
-                    SizedBox(height: 8),
-                    CompaniesSwiper(),
-                    ToolsWordCloud(),
-                    SizedBox(height: 16)
-                  ],
-                )))
+                padding: const EdgeInsets.only(left: 24, right: 24),
+                child: _selectedIndex == 0
+                    ? ListView(
+                        physics: const BouncingScrollPhysics(),
+                        children: const <Widget>[
+                          SizedBox(height: 8),
+                          NameCard(),
+                          SizedBox(height: 8),
+                          CompaniesSwiper(),
+                          ToolsWordCloud(),
+                          SizedBox(height: 16)
+                        ],
+                      )
+                    : const Text('Under Construction')))
       ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

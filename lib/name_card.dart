@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wonderland/typography.dart';
 
 class NameCard extends StatefulWidget {
   const NameCard({super.key});
@@ -10,23 +11,14 @@ class NameCard extends StatefulWidget {
 }
 
 class _NameCardState extends State<NameCard> {
-  double shadow = 5;
-  double radius = 10;
-  double scale = 1.0;
-  double opacity = 1.0;
-  Color? textColor;
-  bool hover = false;
-
   @override
   Widget build(BuildContext context) {
-    double height = 400;
-    double badgeDistanceFromBottom = 16;
-    double buttonDistanceFromBottom = 160;
+    double height = 272;
     double width = MediaQuery.of(context).size.width;
     return Stack(
       children: [
         AnimatedOpacity(
-          opacity: opacity,
+          opacity: 1.0,
           duration: const Duration(milliseconds: 300),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 300),
@@ -39,23 +31,17 @@ class _NameCardState extends State<NameCard> {
                           Brightness.light
                       ? const AssetImage('assets/images/background-light.jpeg')
                       : const AssetImage('assets/images/background-dark.jpeg')),
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(shadow, shadow),
-                  color: Theme.of(context).colorScheme.secondary,
-                  blurRadius: shadow,
-                ),
-              ],
-              borderRadius: BorderRadius.all(
-                Radius.circular(radius),
+              
+              borderRadius: const BorderRadius.all(
+                Radius.circular(20),
               ),
             ),
           ),
         ),
         Positioned(
-          top: 36,
-          left: 36,
-          right: 36,
+          top: 16,
+          left: 24,
+          right: 8,
           child: AnimatedDefaultTextStyle(
             duration: const Duration(milliseconds: 300),
             child: const Column(
@@ -64,17 +50,12 @@ class _NameCardState extends State<NameCard> {
                   Text('Hi, I\'m Zhe Wang,'),
                   Text('a Seasoned Data Artisan.')
                 ]),
-            style: TextStyle(
-              fontFamily: 'Bodoni 72',
-              fontSize: width * 0.06,
-              fontWeight: FontWeight.w800,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            style: TypographyUtil.headlineMediumBold(context),
           ),
         ),
         Positioned(
-            right: 32,
-            bottom: buttonDistanceFromBottom,
+            right: 24,
+            top: 112,
             child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
               IconButton(
                   icon: SvgPicture.asset('assets/icons/linkedin.svg',
@@ -95,11 +76,13 @@ class _NameCardState extends State<NameCard> {
                   }),
             ])),
         Positioned(
-            bottom: badgeDistanceFromBottom,
+            top: 144,
             left: 16,
             child: Container(
+              height: 112,
                 alignment: Alignment.bottomLeft,
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SvgPicture.asset('assets/icons/badge.svg',
                         colorFilter: ColorFilter.mode(

@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:word_cloud/word_cloud_data.dart';
 import 'package:word_cloud/word_cloud_view.dart';
 import 'package:word_cloud/word_cloud_shape.dart';
+import 'package:wonderland/typography.dart';
 
 class ToolsWordCloud extends StatelessWidget {
   const ToolsWordCloud({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    double radius = 160;
     WordCloudData wcData = WordCloudData(data: [
       {'word': 'AWS', 'value': 90},
       {'word': 'Docker', 'value': 90},
@@ -78,24 +80,19 @@ class ToolsWordCloud extends StatelessWidget {
           alignment: Alignment.bottomLeft,
           child: Text(
             'Tools',
-            style: TextStyle(
-              fontFamily: 'Bodoni 72 Smallcaps Book',
-              fontSize: 48,
-              fontWeight: FontWeight.w800,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            style: TypographyUtil.headlineLarge(context)
           ),
         ),
         Center(
             child: WordCloudView(
-          shape: WordCloudCircle(radius: 272),
+          shape: WordCloudCircle(radius: radius),
           // mapcolor:  Theme.of(context).colorScheme.primary,
           data: wcData,
-          maxtextsize: 36,
-          mapwidth: 544,
-          mapheight: 544,
-          fontFamily: 'Bodoni 72',
-          fontWeight: FontWeight.normal,
+          maxtextsize: 24,
+          mapwidth: radius * 2,
+          mapheight: radius * 2,
+          fontFamily: TypographyUtil.wordCloudMax(context).fontFamily,
+          fontWeight: TypographyUtil.wordCloudMax(context).fontWeight,
           colorlist: [
             colorScheme.primary,
             colorScheme.secondary,
