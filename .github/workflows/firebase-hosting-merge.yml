@@ -11,6 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.6'
+          channel: 'stable'
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Build web
+        run: flutter build web --web-renderer canvaskit --release
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
