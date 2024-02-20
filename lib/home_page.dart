@@ -117,27 +117,27 @@ class _HomePageState extends State<HomePage> {
                           icon: const Icon(Icons.more_horiz_rounded),
                         )
                       : const SizedBox(),
-                  destinations: const <NavigationRailDestination>[
+                  destinations: <NavigationRailDestination>[
                     NavigationRailDestination(
-                      icon: Icon(Icons.cottage_outlined),
-                      selectedIcon: Icon(Icons.cottage),
-                      label: Text('home'),
+                      icon: const Icon(Icons.cottage_outlined),
+                      selectedIcon: const Icon(Icons.cottage),
+                      label: Text('home', style: TypographyUtil.keywordsList(context)),
                     ),
                     NavigationRailDestination(
-                      icon: Icon(Icons.hiking_outlined),
-                      selectedIcon: Icon(Icons.hiking),
-                      label: Text('experience'),
+                      icon: const Icon(Icons.hiking_outlined),
+                      selectedIcon: const Icon(Icons.hiking),
+                      label: Text('experience', style: TypographyUtil.keywordsList(context)),
                     ),
                     NavigationRailDestination(
-                      icon: Icon(Icons.auto_stories_outlined),
-                      selectedIcon: Icon(Icons.auto_stories),
-                      label: Text('stories'),
+                      icon: const Icon(Icons.auto_stories_outlined),
+                      selectedIcon: const Icon(Icons.auto_stories),
+                      label: Text('stories', style: TypographyUtil.keywordsList(context)),
                     ),
                   ],
                 ))),
         Expanded(
             child: Padding(
-                padding: const EdgeInsets.only(left: 24, right: 24),
+                padding: const EdgeInsets.only(left: 16, right: 16),
                 child: _selectDestination()))
       ]),
       floatingActionButton: FloatingActionButton(

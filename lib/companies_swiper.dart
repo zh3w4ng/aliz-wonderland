@@ -57,24 +57,24 @@ class CompaniesSwiper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GridTile roomorama = _buildGridTile(
-        context, 'roomorama-logo', 'Roomorama Pte. Ltd.', 'sg');
+        context, 'roomorama-logo', 'Roomorama.', 'sg');
     GridTile highspot = _buildGridTile(
-        context, 'highspot-logo', 'Highspot Inc.', 'us');
+        context, 'highspot-logo', 'Highspot', 'us');
     GridTile sia = _buildGridTile(
         context,
         'singapore-airlines-logo',
-        'Singapore Airlines',
+        'SIA',
         'sg');
     GridTile thirtyThree = _buildGridTile(
-        context, '33-logo', '33Across Inc.', 'us');
+        context, '33-logo', '33Across', 'us');
     GridTile kpler = _buildGridTile(
-        context, 'kpler-logo', 'Kpler Pte. Ltd.', 'fr');
+        context, 'kpler-logo', 'Kpler', 'fr');
     GridTile vertex = _buildGridTile(
-        context, 'vertex-logo', 'Vertex Ventures', 'sg');
+        context, 'vertex-logo', 'Vertex', 'sg');
     GridTile moneyHero = _buildGridTile(context,
-        'money-hero-logo', 'MoneyHero Group', 'sg');
+        'money-hero-logo', 'MoneyHero', 'sg');
     GridTile viki = _buildGridTile(context,
-        'rakuten-viki-logo', 'Viki Pte. Ltd.', 'jp');
+        'rakuten-viki-logo', 'Viki', 'jp');
     List<GridTile> children = <GridTile>[
       highspot,
       sia,

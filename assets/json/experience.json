@@ -2,7 +2,7 @@
   {
     "title": "Senior Data Engineer",
     "logo": "assets/icons/companies/highspot-logo.svg",
-    "from": "Aug 2022",
+    "from": "Aug '22",
     "to": "Now",
     "company": "Highspot Inc.",
     "summary": [
@@ -29,8 +29,8 @@
   {
     "title": "Data Engineer",
     "logo": "assets/icons/companies/money-hero-logo.svg",
-    "from": "Jul 2021 ",
-    "to": "Aug 2022",
+    "from": "Jul '21 ",
+    "to": "Aug '22",
     "company": "MoneyHero Group",
     "summary": [
       "build data lake on S3 with Pipedrive as data source and AWS services (Lambda, Kinesis) for ETL pipeline",
@@ -52,8 +52,8 @@
   {
     "title": "Engineering Manager",
     "logo": "assets/icons/companies/kpler-logo.svg",
-    "from": "Jan 2020",
-    "to": "Jul 2021",
+    "from": "Jan '20",
+    "to": "Jul '21",
     "company": "Kpler",
     "summary": [
       "migrate a streaming system with 300+ legacy modules to standardized code structure with automated validation, test and monitoring",
@@ -79,8 +79,8 @@
   {
     "title": "Director of Technology",
     "logo": "assets/icons/companies/vertex-logo.svg",
-    "from": "Jul 2018",
-    "to": "Jan 2020",
+    "from": "Jul '18",
+    "to": "Jan '20",
     "company": "Vertex Ventures",
     "summary": [
       "built from scratch report systems to automatically generate investment report, first based on Power BI, later based on Haskell Hledger framework",
@@ -99,8 +99,8 @@
   {
     "title": "Assistant Manager",
     "logo": "assets/icons/companies/singapore-airlines-logo.svg",
-    "from": "Jun 2016",
-    "to": "Jul 2018",
+    "from": "Jun '16",
+    "to": "Jul '18",
     "company":       "Singapore Airlines",
     "summary": [
       "built from scratch a prototype of big data analytic system based on Kafka, Spark, S3, Redshift, and Tableau. Transformed data in parquet on S3 is for data scientists, while curated datasets in Redshift is for Tableau dashboard for business users",
@@ -120,8 +120,8 @@
   {
     "title": "Tech Lead",
     "logo": "assets/icons/companies/rakuten-viki-logo.svg",
-    "from": "Sep 2015",
-    "to": "Jun 2016",
+    "from": "Sep '15",
+    "to": "Jun '16",
     "company": "Rakuten Viki",
     "summary": [
       "revamped the whole front-end with Ruby on Rails and AngularJS",
@@ -146,8 +146,8 @@
   {
     "title": "Software Developer",
     "logo": "assets/icons/companies/roomorama-logo.svg",
-    "from": "Oct 2013",
-    "to": "Sep 2015",
+    "from": "Oct '13",
+    "to": "Sep '15",
     "company": "Roomorama",
     "subtitles": [
       "Roomorama",
@@ -175,8 +175,8 @@
   {
     "title": "Software Developer",
     "logo": "assets/icons/companies/33-logo.svg",
-    "from": "Mar 2013",
-    "to": "Jun 2013",
+    "from": "Mar '13",
+    "to": "Jun '13",
     "company": "33Across Inc.",
     "summary": [
       "maintained a reporting web application on Ruby on Rails and JQuery",
