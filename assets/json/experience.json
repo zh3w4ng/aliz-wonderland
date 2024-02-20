@@ -1,0 +1,198 @@
+[
+  {
+    "title": "Senior Data Engineer",
+    "logo": "assets/icons/companies/highspot-logo.svg",
+    "from": "Aug 2022",
+    "to": "Now",
+    "company": "Highspot Inc.",
+    "summary": [
+      "maintain a legacy Web App based on Postgresql, Clojure and Ruby on Rails",
+      "automate local k8s dev environment with Tilt",
+      "abstract Parquet serialzation away with Iceberg in Glue Data Catalog",
+      "build a new data pipeline with Kafka and Flink on K8s",
+      "support Data Science team with AWS Glue Spark"
+    ],
+    "keywords": [
+      "AWS",
+      "Avro",
+      "Clojure",
+      "Flink",
+      "Glue",
+      "Iceberg",
+      "Java",
+      "Kafka",
+      "K8s",
+      "Postgresql",
+      "Tilt"
+    ]
+  },
+  {
+    "title": "Data Engineer",
+    "logo": "assets/icons/companies/money-hero-logo.svg",
+    "from": "Jul 2021 ",
+    "to": "Aug 2022",
+    "company": "MoneyHero Group",
+    "summary": [
+      "build data lake on S3 with Pipedrive as data source and AWS services (Lambda, Kinesis) for ETL pipeline",
+      "codify the whole infrastructure with native AWS CDK in Typescript",
+      "mentor young devs and mangage overseas vendor team",
+      "provide tech/analytical support to colleagues from various business units of subsidary companies"
+    ],
+    "keywords": [
+      "AWS",
+      "CDK",
+      "Kinesis",
+      "Lambda",
+      "MetaBase",
+      "PipeDrive",
+      "RDS",
+      "Typescript"
+    ]
+  },
+  {
+    "title": "Engineering Manager",
+    "logo": "assets/icons/companies/kpler-logo.svg",
+    "from": "Jan 2020",
+    "to": "Jul 2021",
+    "company": "Kpler",
+    "summary": [
+      "migrate a streaming system with 300+ legacy modules to standardized code structure with automated validation, test and monitoring",
+      "re-architecture the tech stack with Kubernetes, Airflow and Kafka for the whole backend",
+      "improve devops tooling with Terraform scripts and other templates or recipes",
+      "mentor young devs with TDD mindset and technique for both backend and frontend",
+      "experiment with various serialization formats such Json, Avro and ProtoBuf"
+    ],
+    "keywords": [
+      "Airflow",
+      "Avro",
+      "AWS",
+      "React",
+      "RxJS",
+      "Kafka",
+      "Kubernates",
+      "Pandas",
+      "Scrapy",
+      "ProtoBuf",
+      "Terraform"
+    ]
+  },
+  {
+    "title": "Director of Technology",
+    "logo": "assets/icons/companies/vertex-logo.svg",
+    "from": "Jul 2018",
+    "to": "Jan 2020",
+    "company": "Vertex Ventures",
+    "summary": [
+      "built from scratch report systems to automatically generate investment report, first based on Power BI, later based on Haskell Hledger framework",
+      "revamped 6 Vertex Ventures websites with minimalist modular design based on GatsbyJS and StoryBlok",
+      "improved internal sharing platform with better search functionality based on Solr"
+    ],
+    "keywords": [
+      "GatsbyJS",
+      "React",
+      "Haskell",
+      "Power BI",
+      "Solr",
+      "Drupal"
+    ]
+  },
+  {
+    "title": "Assistant Manager",
+    "logo": "assets/icons/companies/singapore-airlines-logo.svg",
+    "from": "Jun 2016",
+    "to": "Jul 2018",
+    "company":       "Singapore Airlines",
+    "summary": [
+      "built from scratch a prototype of big data analytic system based on Kafka, Spark, S3, Redshift, and Tableau. Transformed data in parquet on S3 is for data scientists, while curated datasets in Redshift is for Tableau dashboard for business users",
+      "developed two Scala parsers for 1) Amadeus PNR booking reservation for personalization and 2) FlightOps QAR measurements hard-landing detection",
+      "helped data scientists to convert scripts between Scala and Python"
+    ],
+    "keywords": [
+      "Kafka",
+      "Akka Streams",
+      "Cassandra",
+      "Spark",
+      "S3",
+      "Redshift",
+      "Tableau"
+    ]
+  },
+  {
+    "title": "Tech Lead",
+    "logo": "assets/icons/companies/rakuten-viki-logo.svg",
+    "from": "Sep 2015",
+    "to": "Jun 2016",
+    "company": "Rakuten Viki",
+    "summary": [
+      "revamped the whole front-end with Ruby on Rails and AngularJS",
+      "managed a high-throughput pipeline based on Fluentd, HAProxy, Cascading and Azkaban",
+      "improved ingestion runtime performance by migrating from Hive to Spark",
+      "dockerized and automated as much as possible",
+      "helped data scientists on customer segmentation and marketing compaigns"
+    ],
+    "keywords": [
+      "Ruby on Rails",
+      "AngularJS",
+      "Fluentd",
+      "HAProxy",
+      "Docker",
+      "Clojure",
+      "Postgresql",
+      "Reshift",
+      "Hive",
+      "Spark"
+    ]
+  },
+  {
+    "title": "Software Developer",
+    "logo": "assets/icons/companies/roomorama-logo.svg",
+    "from": "Oct 2013",
+    "to": "Sep 2015",
+    "company": "Roomorama",
+    "subtitles": [
+      "Roomorama",
+      "Singapore"
+    ],
+    "summary": [
+      "maintained a codebase on Ruby on Rails and BackboneJS",
+      "experimented with different search options and suggestions for better conversion rates, based on Hive, EMR, ELK",
+      "integrated workflow using Chef + Opsworks and automated as much as possible"
+    ],
+    "keywords": [
+      "Ruby on Rails",
+      "BackboneJS",
+      "Kibana",
+      "ElasticSearch",
+      "MySQL",
+      "Redis",
+      "EMR",
+      "Hive",
+      "Tez",
+      "Chef",
+      "OpsWorks"
+    ]
+  },
+  {
+    "title": "Software Developer",
+    "logo": "assets/icons/companies/33-logo.svg",
+    "from": "Mar 2013",
+    "to": "Jun 2013",
+    "company": "33Across Inc.",
+    "summary": [
+      "maintained a reporting web application on Ruby on Rails and JQuery",
+      "ran adhoc ETL jobs in Pig and Hive for reporting purposes. Keywords: Ruby on Rails, JQuery, Hadoop, Hive, Pig"
+    ],
+    "keywords": [
+      "Ruby on Rails",
+      "AngularJS",
+      "Fluentd",
+      "HAProxy",
+      "Docker",
+      "Clojure",
+      "Postgresql",
+      "Reshift",
+      "Hive",
+      "Spark"
+    ]
+  }
+]

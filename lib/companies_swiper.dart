@@ -24,7 +24,7 @@ class CompaniesSwiper extends StatelessWidget {
   }
 
   GridTile _buildGridTile(
-      BuildContext context, String path, String name, String countryCode) {
+      BuildContext context, String companyLogo, String name, String countryCode) {
     const double height = 48;
     return GridTile(
         child: Container(
@@ -33,7 +33,7 @@ class CompaniesSwiper extends StatelessWidget {
               const SizedBox(height: 16),
               SizedBox(
                 height: height,
-                child: SvgPicture.asset(path,
+                child: SvgPicture.asset("assets/icons/companies/$companyLogo.svg",
                     height: height,
                     colorFilter: ColorFilter.mode(
                         Theme.of(context).colorScheme.secondary,
@@ -56,31 +56,34 @@ class CompaniesSwiper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GridTile roomorama = _buildGridTile(
+        context, 'roomorama-logo', 'Roomorama Pte. Ltd.', 'sg');
     GridTile highspot = _buildGridTile(
-        context, 'assets/icons/teams/highspot-logo.svg', 'Highspot Inc.', 'us');
+        context, 'highspot-logo', 'Highspot Inc.', 'us');
     GridTile sia = _buildGridTile(
         context,
-        'assets/icons/teams/singapore-airlines-logo.svg',
+        'singapore-airlines-logo',
         'Singapore Airlines',
         'sg');
     GridTile thirtyThree = _buildGridTile(
-        context, 'assets/icons/teams/33-logo.svg', '33Across Inc.', 'us');
+        context, '33-logo', '33Across Inc.', 'us');
     GridTile kpler = _buildGridTile(
-        context, 'assets/icons/teams/kpler-logo.svg', 'Kpler Pte. Ltd.', 'fr');
+        context, 'kpler-logo', 'Kpler Pte. Ltd.', 'fr');
     GridTile vertex = _buildGridTile(
-        context, 'assets/icons/teams/vertex-logo.svg', 'Vertex Ventures', 'sg');
+        context, 'vertex-logo', 'Vertex Ventures', 'sg');
     GridTile moneyHero = _buildGridTile(context,
-        'assets/icons/teams/money-hero-logo.svg', 'MoneyHero Group', 'sg');
+        'money-hero-logo', 'MoneyHero Group', 'sg');
     GridTile viki = _buildGridTile(context,
-        'assets/icons/teams/rakuten-viki-logo.svg', 'Viki Pte. Ltd.', 'jp');
+        'rakuten-viki-logo', 'Viki Pte. Ltd.', 'jp');
     List<GridTile> children = <GridTile>[
       highspot,
       sia,
       thirtyThree,
-      kpler,
       vertex,
+      kpler,
       moneyHero,
-      viki
+      viki,
+      roomorama
     ];
 
     return Column(

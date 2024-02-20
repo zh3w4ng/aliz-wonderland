@@ -30,11 +30,15 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^6.1.1
+  yaml: ^3.1.2
   card_swiper : ^3.0.0
   flutter_svg: ^2.0.9
   word_cloud: ^1.0.1
   country_icons: ^3.0.0
+  syntax_highlight: ^0.3.0
+  google_fonts: ^6.1.0
   url_launcher: ^6.2.3
+  timelines_plus: ^1.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -108,14 +112,15 @@ flutter:
     - assets/icons/badge.svg
     - assets/icons/degrees.svg
     - assets/icons/dark_mode.svg
-    - assets/icons/teams/highspot-logo.svg
-    - assets/icons/teams/singapore-airlines-logo.svg
-    - assets/icons/teams/33-logo.svg
-    - assets/icons/teams/kpler-logo.svg
-    - assets/icons/teams/vertex-logo.svg
-    - assets/icons/teams/money-hero-logo.svg
-    - assets/icons/teams/rakuten-viki-logo.svg
-
+    - assets/icons/companies/highspot-logo.svg
+    - assets/icons/companies/roomorama-logo.svg
+    - assets/icons/companies/singapore-airlines-logo.svg
+    - assets/icons/companies/33-logo.svg
+    - assets/icons/companies/kpler-logo.svg
+    - assets/icons/companies/vertex-logo.svg
+    - assets/icons/companies/money-hero-logo.svg
+    - assets/icons/companies/rakuten-viki-logo.svg
+    - assets/json/experience.json
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

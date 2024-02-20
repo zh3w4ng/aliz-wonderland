@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wonderland/experience_cards.dart';
 import 'package:wonderland/name_card.dart';
 import 'package:wonderland/companies_swiper.dart';
+import 'package:wonderland/stories_list.dart';
 import 'package:wonderland/tools_word_cloud.dart';
 import 'package:wonderland/theme_mode_provider.dart';
 import 'package:wonderland/typography.dart';
@@ -29,11 +31,32 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _navigationRailVisible = false;
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   NavigationRailLabelType labelType = NavigationRailLabelType.all;
   bool showLeading = false;
   bool showTrailing = false;
   double groupAlignment = -1.0;
+
+  Widget _selectDestination() {
+    switch (_selectedIndex) {
+      case 1:
+        return ExperienceCards();
+      case 2:
+        return const StoriesList();
+      default:
+        return ListView(
+          physics: const BouncingScrollPhysics(),
+          children: const <Widget>[
+            SizedBox(height: 8),
+            NameCard(),
+            SizedBox(height: 8),
+            CompaniesSwiper(),
+            ToolsWordCloud(),
+            SizedBox(height: 16)
+          ],
+        );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,19 +138,7 @@ class _HomePageState extends State<HomePage> {
         Expanded(
             child: Padding(
                 padding: const EdgeInsets.only(left: 24, right: 24),
-                child: _selectedIndex == 0
-                    ? ListView(
-                        physics: const BouncingScrollPhysics(),
-                        children: const <Widget>[
-                          SizedBox(height: 8),
-                          NameCard(),
-                          SizedBox(height: 8),
-                          CompaniesSwiper(),
-                          ToolsWordCloud(),
-                          SizedBox(height: 16)
-                        ],
-                      )
-                    : const Text('Under Construction')))
+                child: _selectDestination()))
       ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
