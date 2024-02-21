@@ -35,6 +35,12 @@ class _UnderConstructionCardState extends State<UnderConstructionCard> {
               borderRadius: const BorderRadius.all(
                 Radius.circular(20),
               ),
+              boxShadow: [
+                BoxShadow(
+                    color: Theme.of(context).colorScheme.secondary,
+                    offset: const Offset(3, 3),
+                    blurRadius: 5)
+              ]
             ),
           ),
           Center(
