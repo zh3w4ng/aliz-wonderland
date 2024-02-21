@@ -31,7 +31,7 @@ dependencies:
     sdk: flutter
   provider: ^6.1.1
   yaml: ^3.1.2
-  card_swiper : ^3.0.0
+  card_swiper: ^3.0.0
   flutter_svg: ^2.0.9
   word_cloud: ^1.0.1
   country_icons: ^3.0.0
@@ -96,16 +96,17 @@ flutter:
   fonts:
     - family: Bodoni 72 Smallcaps Book
       fonts:
-        - asset: 'assets/fonts/bodoni/Bodoni 72 Smallcaps Book.ttf'
+        - asset: "assets/fonts/bodoni/Bodoni 72 Smallcaps Book.ttf"
     - family: Bodoni 72 OS
       fonts:
-        - asset: 'assets/fonts/bodoni/Bodoni 72 OS.ttc'
+        - asset: "assets/fonts/bodoni/Bodoni 72 OS.ttc"
     - family: Bodoni 72
       fonts:
-        - asset: 'assets/fonts/bodoni/Bodoni 72.ttc'
+        - asset: "assets/fonts/bodoni/Bodoni 72.ttc"
   assets:
     - assets/images/background-light.jpeg
     - assets/images/background-dark.jpeg
+    - assets/images/alice-in-borderland.jpeg
     - assets/icons/zw-logo.svg
     - assets/icons/linkedin.svg
     - assets/icons/mail.svg

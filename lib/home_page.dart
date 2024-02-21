@@ -7,6 +7,7 @@ import 'package:wonderland/stories_list.dart';
 import 'package:wonderland/tools_word_cloud.dart';
 import 'package:wonderland/theme_mode_provider.dart';
 import 'package:wonderland/typography.dart';
+import 'package:wonderland/under_construction_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage(
@@ -31,7 +32,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _navigationRailVisible = false;
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
   NavigationRailLabelType labelType = NavigationRailLabelType.all;
   bool showLeading = false;
   bool showTrailing = false;
@@ -40,9 +41,9 @@ class _HomePageState extends State<HomePage> {
   Widget _selectDestination() {
     switch (_selectedIndex) {
       case 1:
-        return ExperienceCards();
+        return const ExperienceCards();
       case 2:
-        return const StoriesList();
+        return const UnderConstructionCard();
       default:
         return ListView(
           physics: const BouncingScrollPhysics(),
@@ -121,17 +122,20 @@ class _HomePageState extends State<HomePage> {
                     NavigationRailDestination(
                       icon: const Icon(Icons.cottage_outlined),
                       selectedIcon: const Icon(Icons.cottage),
-                      label: Text('home', style: TypographyUtil.keywordsList(context)),
+                      label: Text('home',
+                          style: TypographyUtil.keywordsList(context)),
                     ),
                     NavigationRailDestination(
                       icon: const Icon(Icons.hiking_outlined),
                       selectedIcon: const Icon(Icons.hiking),
-                      label: Text('experience', style: TypographyUtil.keywordsList(context)),
+                      label: Text('experience',
+                          style: TypographyUtil.keywordsList(context)),
                     ),
                     NavigationRailDestination(
                       icon: const Icon(Icons.auto_stories_outlined),
                       selectedIcon: const Icon(Icons.auto_stories),
-                      label: Text('stories', style: TypographyUtil.keywordsList(context)),
+                      label: Text('stories',
+                          style: TypographyUtil.keywordsList(context)),
                     ),
                   ],
                 ))),

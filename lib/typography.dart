@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TypographyUtil {
+  static TextStyle headlineLargeOS(BuildContext context) {
+    return Typography.material2021().dense.headlineLarge!.copyWith(
+        fontFamily: 'Bodoni 72 OS',
+        color: Theme.of(context).colorScheme.onSecondaryContainer);
+  }
   static TextStyle headlineLarge(BuildContext context) {
     return Typography.material2021().dense.headlineLarge!.copyWith(
         fontFamily: 'Bodoni 72 Smallcaps Book',

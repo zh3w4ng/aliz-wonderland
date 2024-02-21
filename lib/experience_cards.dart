@@ -101,7 +101,9 @@ class _ExperienceCardsState extends State<ExperienceCards> {
     return FutureBuilder(
         future: doc,
         builder: (context, snapshot) => snapshot.data != null
-            ? Timeline.tileBuilder(
+            ? Padding(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: Timeline.tileBuilder(
                 theme: TimelineTheme.of(context).copyWith(
                   color: Theme.of(context).colorScheme.primary,
                   nodePosition: 0.1,
@@ -116,7 +118,7 @@ class _ExperienceCardsState extends State<ExperienceCards> {
                       _builCard(context, snapshot.data![index]),
                   itemCount: snapshot.data!.length,
                 ),
-              )
+              ))
             : const SizedBox.shrink());
   }
 }
