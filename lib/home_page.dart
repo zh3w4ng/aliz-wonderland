@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:wonderland/experience_cards.dart';
 import 'package:wonderland/name_card.dart';
 import 'package:wonderland/companies_swiper.dart';
+import 'package:wonderland/stories_list.dart';
 import 'package:wonderland/tools_word_cloud.dart';
 import 'package:wonderland/theme_mode_provider.dart';
 import 'package:wonderland/typography.dart';
+import 'package:wonderland/under_construction_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage(
@@ -34,6 +37,27 @@ class _HomePageState extends State<HomePage> {
   bool showLeading = false;
   bool showTrailing = false;
   double groupAlignment = -1.0;
+
+  Widget _selectDestination() {
+    switch (_selectedIndex) {
+      case 1:
+        return const ExperienceCards();
+      case 2:
+        return const UnderConstructionCard();
+      default:
+        return ListView(
+          physics: const BouncingScrollPhysics(),
+          children: const <Widget>[
+            SizedBox(height: 8),
+            NameCard(),
+            SizedBox(height: 8),
+            CompaniesSwiper(),
+            ToolsWordCloud(),
+            SizedBox(height: 16)
+          ],
+        );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,40 +118,31 @@ class _HomePageState extends State<HomePage> {
                           icon: const Icon(Icons.more_horiz_rounded),
                         )
                       : const SizedBox(),
-                  destinations: const <NavigationRailDestination>[
+                  destinations: <NavigationRailDestination>[
                     NavigationRailDestination(
-                      icon: Icon(Icons.cottage_outlined),
-                      selectedIcon: Icon(Icons.cottage),
-                      label: Text('home'),
+                      icon: const Icon(Icons.cottage_outlined),
+                      selectedIcon: const Icon(Icons.cottage),
+                      label: Text('home',
+                          style: TypographyUtil.keywordsList(context)),
                     ),
                     NavigationRailDestination(
-                      icon: Icon(Icons.hiking_outlined),
-                      selectedIcon: Icon(Icons.hiking),
-                      label: Text('experience'),
+                      icon: const Icon(Icons.hiking_outlined),
+                      selectedIcon: const Icon(Icons.hiking),
+                      label: Text('experience',
+                          style: TypographyUtil.keywordsList(context)),
                     ),
                     NavigationRailDestination(
-                      icon: Icon(Icons.auto_stories_outlined),
-                      selectedIcon: Icon(Icons.auto_stories),
-                      label: Text('stories'),
+                      icon: const Icon(Icons.auto_stories_outlined),
+                      selectedIcon: const Icon(Icons.auto_stories),
+                      label: Text('stories',
+                          style: TypographyUtil.keywordsList(context)),
                     ),
                   ],
                 ))),
         Expanded(
             child: Padding(
-                padding: const EdgeInsets.only(left: 24, right: 24),
-                child: _selectedIndex == 0
-                    ? ListView(
-                        physics: const BouncingScrollPhysics(),
-                        children: const <Widget>[
-                          SizedBox(height: 8),
-                          NameCard(),
-                          SizedBox(height: 8),
-                          CompaniesSwiper(),
-                          ToolsWordCloud(),
-                          SizedBox(height: 16)
-                        ],
-                      )
-                    : const Text('Under Construction')))
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: _selectDestination()))
       ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

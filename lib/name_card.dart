@@ -17,26 +17,26 @@ class _NameCardState extends State<NameCard> {
     double width = MediaQuery.of(context).size.width;
     return Stack(
       children: [
-        AnimatedOpacity(
-          opacity: 1.0,
+        AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            width: double.infinity,
-            height: height,
-            decoration: BoxDecoration(
+          width: double.infinity,
+          height: height,
+          decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,
                   image: Theme.of(context).colorScheme.brightness ==
                           Brightness.light
                       ? const AssetImage('assets/images/background-light.jpeg')
                       : const AssetImage('assets/images/background-dark.jpeg')),
-              
               borderRadius: const BorderRadius.all(
                 Radius.circular(20),
               ),
-            ),
-          ),
+              boxShadow: [
+                BoxShadow(
+                    color: Theme.of(context).colorScheme.secondary,
+                    offset: const Offset(1, 1),
+                    blurRadius: 2)
+              ]),
         ),
         Positioned(
           top: 16,
@@ -79,7 +79,7 @@ class _NameCardState extends State<NameCard> {
             top: 144,
             left: 16,
             child: Container(
-              height: 112,
+                height: 112,
                 alignment: Alignment.bottomLeft,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,

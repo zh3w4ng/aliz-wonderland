@@ -1,8 +1,11 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 
 class TypographyUtil {
+  static TextStyle headlineLargeOS(BuildContext context) {
+    return Typography.material2021().dense.headlineLarge!.copyWith(
+        fontFamily: 'Bodoni 72 OS',
+        color: Theme.of(context).colorScheme.onSecondaryContainer);
+  }
   static TextStyle headlineLarge(BuildContext context) {
     return Typography.material2021().dense.headlineLarge!.copyWith(
         fontFamily: 'Bodoni 72 Smallcaps Book',
@@ -22,6 +25,7 @@ class TypographyUtil {
         color: Theme.of(context).colorScheme.primary,
         fontWeight: FontWeight.w800);
   }
+
   static TextStyle labelMedium(BuildContext context) {
     return Typography.material2021().dense.labelMedium!.copyWith(
         fontFamily: 'Bodoni 72',
@@ -47,8 +51,19 @@ class TypographyUtil {
   }
 
   static TextStyle wordCloudMax(BuildContext context) {
-    return Typography.material2021().dense.titleMedium!.copyWith(
-        fontFamily: 'Bodoni 72');
+    return Typography.material2021()
+        .dense
+        .titleMedium!
+        .copyWith(fontFamily: 'Bodoni 72');
   }
 
+   static TextStyle keywordsTitle(BuildContext context) {
+    return TextStyle(
+        color: Theme.of(context).colorScheme.primary, fontFamily: 'Bodoni 72', fontWeight: FontWeight.bold);
+  }
+
+  static TextStyle keywordsList(BuildContext context) {
+    return TextStyle(
+        color: Theme.of(context).colorScheme.primary, fontFamily: 'Bodoni 72');
+  }
 }
