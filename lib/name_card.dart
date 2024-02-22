@@ -63,7 +63,16 @@ class _NameCardState extends State<NameCard> {
                           Theme.of(context).colorScheme.secondary,
                           BlendMode.srcIn)),
                   onPressed: () {
-                    launchUrlString('https://www.linkedin.com/in/zh3w4ng');
+                    launchUrlString('https://linkedin.com/in/zh3w4ng');
+                  }),
+
+              IconButton(
+                  icon: SvgPicture.asset('assets/icons/github.svg',
+                      colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.secondary,
+                          BlendMode.srcIn)),
+                  onPressed: () {
+                    launchUrlString('https://github.com/zh3w4ng/aliz-wonderland');
                   }),
               IconButton(
                   icon: SvgPicture.asset('assets/icons/mail.svg',
