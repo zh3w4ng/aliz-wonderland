@@ -55,7 +55,7 @@ class _NameCardState extends State<NameCard> {
         ),
         Positioned(
             right: 24,
-            top: 112,
+            top: 102,
             child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
               IconButton(
                   icon: SvgPicture.asset('assets/icons/linkedin.svg',
@@ -65,14 +65,22 @@ class _NameCardState extends State<NameCard> {
                   onPressed: () {
                     launchUrlString('https://linkedin.com/in/zh3w4ng');
                   }),
-
               IconButton(
                   icon: SvgPicture.asset('assets/icons/github.svg',
                       colorFilter: ColorFilter.mode(
                           Theme.of(context).colorScheme.secondary,
                           BlendMode.srcIn)),
                   onPressed: () {
-                    launchUrlString('https://github.com/zh3w4ng/aliz-wonderland');
+                    launchUrlString(
+                        'https://github.com/zh3w4ng/aliz-wonderland');
+                  }),
+              IconButton(
+                  icon: SvgPicture.asset('assets/icons/medium.svg',
+                      colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.secondary,
+                          BlendMode.srcIn)),
+                  onPressed: () {
+                    launchUrlString('https://medium.com/@zh3w4ng');
                   }),
               IconButton(
                   icon: SvgPicture.asset('assets/icons/mail.svg',

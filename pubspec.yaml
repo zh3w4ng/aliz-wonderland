@@ -109,6 +109,7 @@ flutter:
     - assets/icons/zw-logo.svg
     - assets/icons/linkedin.svg
     - assets/icons/mail.svg
+    - assets/icons/medium.svg
     - assets/icons/github.svg
     - assets/icons/badge.svg
     - assets/icons/degrees.svg
