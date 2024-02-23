@@ -4,10 +4,10 @@ import 'package:wonderland/experience_cards.dart';
 import 'package:wonderland/name_card.dart';
 import 'package:wonderland/companies_swiper.dart';
 import 'package:wonderland/stories_list.dart';
+import 'package:wonderland/story_page.dart';
 import 'package:wonderland/tools_word_cloud.dart';
 import 'package:wonderland/theme_mode_provider.dart';
 import 'package:wonderland/typography.dart';
-import 'package:wonderland/under_construction_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage(
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       case 1:
         return const ExperienceCards();
       case 2:
-        return const StoriesList();
+        return const StoryPage();
       default:
         return ListView(
           physics: const BouncingScrollPhysics(),
