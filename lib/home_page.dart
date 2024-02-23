@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
       case 1:
         return const ExperienceCards();
       case 2:
-        return const UnderConstructionCard();
+        return const StoriesList();
       default:
         return ListView(
           physics: const BouncingScrollPhysics(),
