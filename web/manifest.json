@@ -1,11 +1,11 @@
 {
-    "name": "wonderland",
-    "short_name": "wonderland",
+    "name": "aliZ in Wonderland",
+    "short_name": "ZW",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#f5fbf6",
+    "theme_color": "#116b56",
+    "description": "This is a website with tech writings about data engineering artisanship.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
