@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:wonderland/experience_cards.dart';
+import 'package:wonderland/log_in_out_view.dart';
 import 'package:wonderland/name_card.dart';
 import 'package:wonderland/companies_swiper.dart';
-import 'package:wonderland/stories_list.dart';
 import 'package:wonderland/story_page.dart';
 import 'package:wonderland/tools_word_cloud.dart';
-import 'package:wonderland/theme_mode_provider.dart';
+import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/typography.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage(
-      {Key? key, required this.title, required this.themeModeProvider})
+      {Key? key, required this.title, required this.appStateProvider})
       : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -24,7 +26,7 @@ class HomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
-  final ThemeModeProvider themeModeProvider;
+  final AppStateProvider appStateProvider;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -44,6 +46,8 @@ class _HomePageState extends State<HomePage> {
         return const ExperienceCards();
       case 2:
         return const StoryPage();
+      case 3:
+        return const LogInOutView();
       default:
         return ListView(
           physics: const BouncingScrollPhysics(),
@@ -61,6 +65,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appStateProvider = Provider.of<AppStateProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         actions: const [SizedBox(width: 40)],
@@ -78,11 +84,15 @@ class _HomePageState extends State<HomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          SvgPicture.asset('assets/icons/zw-logo.svg',
-              colorFilter: ColorFilter.mode(
-                Theme.of(context).colorScheme.primary,
-                BlendMode.srcATop,
-              )),
+          IconButton(
+              onPressed: () {
+                context.go('/');
+              },
+              icon: SvgPicture.asset('assets/icons/zw-logo.svg',
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.primary,
+                    BlendMode.srcATop,
+                  ))),
           const SizedBox(width: 8),
           Text(widget.title, style: TypographyUtil.titleLarge(context))
         ]),
@@ -137,6 +147,18 @@ class _HomePageState extends State<HomePage> {
                       label: Text('stories',
                           style: TypographyUtil.keywordsList(context)),
                     ),
+                    appStateProvider.loggedIn()
+                        ? NavigationRailDestination(
+                            icon: const Icon(Icons.logout_outlined),
+                            selectedIcon: const Icon(Icons.logout),
+                            label: Text('logout',
+                                style: TypographyUtil.keywordsList(context)))
+                        : NavigationRailDestination(
+                            icon: const Icon(Icons.login_outlined),
+                            selectedIcon: const Icon(Icons.login),
+                            label: Text('login',
+                                style: TypographyUtil.keywordsList(context)),
+                          ),
                   ],
                 ))),
         Expanded(
@@ -146,7 +168,7 @@ class _HomePageState extends State<HomePage> {
       ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          widget.themeModeProvider.toggleThemeMode(
+          appStateProvider.toggleThemeMode(
               Theme.of(context).brightness == Brightness.light);
         },
         tooltip: Theme.of(context).brightness == Brightness.dark

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'firebase_options.dart';
 import 'package:flutter/foundation.dart';
+import 'package:wonderland/story_page.dart';
 import 'package:wonderland/theme.dart';
-import 'package:wonderland/theme_mode_provider.dart';
+import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/home_page.dart';
+import 'package:go_router/go_router.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,8 +17,10 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   if (kDebugMode) {
-     FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
+    await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+    FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
   }
+  GoRouter.optionURLReflectsImperativeAPIs = true;
   runApp(const MyApp());
 }
 
@@ -28,24 +33,30 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  final ThemeModeProvider _themeModeProvider = ThemeModeProvider();
+  final AppStateProvider _appStateProvider = AppStateProvider();
 
   @override
   Widget build(BuildContext context) {
-    const String title = 'aliZ in Wonderland';
     return ChangeNotifierProvider(
-        create: (context) => _themeModeProvider,
+        create: (context) => _appStateProvider,
         builder: (context, _) {
-          final themeModeProvider = Provider.of<ThemeModeProvider>(context);
-          return MaterialApp(
-            title: title,
-            theme: ThemeData(
-                colorScheme: MaterialTheme.lightScheme().toColorScheme()),
-            darkTheme: ThemeData(
-                colorScheme: MaterialTheme.darkScheme().toColorScheme()),
-            themeMode: themeModeProvider.themeMode,
-            home: HomePage(title: title, themeModeProvider: _themeModeProvider),
-          );
+          final appStateProvider = Provider.of<AppStateProvider>(context);
+          return MaterialApp.router(
+              title: appStateProvider.title,
+              theme: ThemeData(
+                  colorScheme: MaterialTheme.lightScheme().toColorScheme()),
+              darkTheme: ThemeData(
+                  colorScheme: MaterialTheme.darkScheme().toColorScheme()),
+              themeMode: appStateProvider.themeMode,
+              routerConfig: GoRouter(routes: [
+                GoRoute(
+                    path: '/',
+                    builder: (context, routerState) => HomePage(
+                        title: appStateProvider.title, appStateProvider: _appStateProvider)),
+                GoRoute(
+                    path: '/story/:id',
+                    builder: (context, routerState) => StoryPage())
+              ]));
         });
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wonderland/typography.dart';
@@ -90,6 +91,12 @@ class _NameCardState extends State<NameCard> {
                   color: Theme.of(context).colorScheme.tertiary,
                   onPressed: () {
                     launchUrlString('mailto:zh3w4ng@gmail.com?subject=Hello');
+                  }),
+              IconButton(
+                  icon: const Icon(Icons.book_outlined),
+                  color: Theme.of(context).colorScheme.tertiary,
+                  onPressed: () {
+                    context.push("/story/J92HYC6dkB6jVE9diy8T");
                   }),
             ])),
         Positioned(
