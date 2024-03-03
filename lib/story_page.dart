@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter_quill/flutter_quill.dart';
-import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
+import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:wonderland/app_state_provider.dart';
+import 'package:wonderland/appflowy_editor.dart';
 import 'package:wonderland/typography.dart';
 
 class StoryPage extends StatefulWidget {
@@ -16,23 +16,22 @@ class StoryPage extends StatefulWidget {
 }
 
 class _StoryPageState extends State<StoryPage> {
-  final QuillController _controller = QuillController.basic();
 
   CollectionReference stories =
       FirebaseFirestore.instance.collection('stories');
+
+  EditorState editorState = EditorState.blank(withInitialText: true);
+
+  late final Map<String, BlockComponentBuilder> blockComponentBuilders;
+
 
   @override
   Widget build(BuildContext context) {
     final appStateProvider = Provider.of<AppStateProvider>(context);
 
-    
-
     final id = GoRouterState.of(context).pathParameters['id'];
+    Future record = stories.doc(id).get();
 
-    stories.doc(id).get().then((snapshot) {
-      Map record = snapshot.data()! as Map;
-      _controller.document = Document.fromJson(record['doc']);
-    });
     return Scaffold(
         appBar: AppBar(
           title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
@@ -50,39 +49,45 @@ class _StoryPageState extends State<StoryPage> {
                 style: TypographyUtil.titleLarge(context))
           ]),
         ),
-        body: Column(
-          children: [
-            appStateProvider.loggedIn()
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        // final story = <String, dynamic>{
-                        //   "title": "test",
-                        //   "summary": "this is a test",
-                        //   "doc":
-                        // };
+        body: FutureBuilder(
+            future: record,
+            builder: (context, snapshot) {
+              final editorState = snapshot.hasData
+                  ? EditorState(
+                      document: Document.fromJson(snapshot.data['doc']))
+                  : EditorState.blank();
 
-                        stories.doc(id).update(
-                            {"doc": _controller.document.toDelta().toJson()});
-                      });
-                    },
-                    icon: const Icon(Icons.save))
-                : const SizedBox.shrink(),
-            QuillToolbar.simple(
-              configurations: QuillSimpleToolbarConfigurations(
-                controller: _controller,
-                embedButtons: FlutterQuillEmbeds.toolbarButtons(),
-              ),
-            ),
-            Expanded(
-                child: QuillEditor.basic(
-              configurations: QuillEditorConfigurations(
-                readOnly: !appStateProvider.loggedIn(),
-                controller: _controller,
-                embedBuilders: FlutterQuillEmbeds.editorWebBuilders(),
-              ),
-            )),
-          ],
-        ));
+              return Column(
+                children: [
+                  appStateProvider.loggedIn()
+                      ? IconButton(
+                          onPressed: () {
+                            // final story = <String, dynamic>{
+                            //   "title": "test",
+                            //   "summary": "this is a test",
+                            //   "doc": editorState.document.toJson()
+                            // };
+
+                            stories
+                                .doc(id)
+                                .update({'doc': editorState.document.toJson()});
+                          },
+                          icon: const Icon(Icons.save))
+                      : const SizedBox.shrink(),
+                  SizedBox(
+                      width: double.infinity,
+                      height: 800,
+                      child: AppFlowyEditor(
+                          editorState: editorState,
+                          autoFocus: true,
+                          characterShortcutEvents: AppflowyEditorUtil.buildCharacterShortcutEvents,
+                          commandShortcutEvents:
+                              AppflowyEditorUtil.buildCommandShortcutEvents(),
+                          blockComponentBuilders:
+                              AppflowyEditorUtil.buildBlockComponentBuilders(
+                                  editorState)))
+                ],
+              );
+            }));
   }
 }

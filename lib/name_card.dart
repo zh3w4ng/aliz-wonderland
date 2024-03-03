@@ -96,7 +96,7 @@ class _NameCardState extends State<NameCard> {
                   icon: const Icon(Icons.book_outlined),
                   color: Theme.of(context).colorScheme.tertiary,
                   onPressed: () {
-                    context.push("/story/J92HYC6dkB6jVE9diy8T");
+                    context.push("/story/cWsnsrkjYqDCbjoxfbRB");
                   }),
             ])),
         Positioned(
