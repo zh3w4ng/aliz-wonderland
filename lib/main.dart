@@ -50,12 +50,10 @@ class _MyAppState extends State<MyApp> {
               themeMode: appStateProvider.themeMode,
               routerConfig: GoRouter(routes: [
                 GoRoute(
-                    path: '/',
-                    builder: (context, routerState) => HomePage(
-                        title: appStateProvider.title, appStateProvider: _appStateProvider)),
+                    path: '/', builder: (context, routerState) => const HomePage()),
                 GoRoute(
                     path: '/story/:id',
-                    builder: (context, routerState) => StoryPage())
+                    builder: (context, routerState) => const StoryPage())
               ]));
         });
   }

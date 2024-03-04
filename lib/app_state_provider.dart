@@ -11,13 +11,13 @@ class AppStateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> logIn(String email, String password) async {
-    final credential = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
-    if (credential.user != null) {
-      user = credential.user!;
-    }
-    notifyListeners();
+  Future<void> logIn({required String email,required String password}) {
+    return FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((value) {
+      user = value.user;
+      notifyListeners();
+    });
   }
 
   Future<void> logOut() async {

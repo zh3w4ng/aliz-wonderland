@@ -16,14 +16,12 @@ class StoryPage extends StatefulWidget {
 }
 
 class _StoryPageState extends State<StoryPage> {
-
   CollectionReference stories =
       FirebaseFirestore.instance.collection('stories');
 
   EditorState editorState = EditorState.blank(withInitialText: true);
 
   late final Map<String, BlockComponentBuilder> blockComponentBuilders;
-
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +34,7 @@ class _StoryPageState extends State<StoryPage> {
         appBar: AppBar(
           title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             IconButton(
-                onPressed: () {
-                  context.go('/');
-                },
+                onPressed: () => context.go('/'),
                 icon: SvgPicture.asset('assets/icons/zw-logo.svg',
                     colorFilter: ColorFilter.mode(
                       Theme.of(context).colorScheme.primary,
@@ -80,7 +76,8 @@ class _StoryPageState extends State<StoryPage> {
                       child: AppFlowyEditor(
                           editorState: editorState,
                           autoFocus: true,
-                          characterShortcutEvents: AppflowyEditorUtil.buildCharacterShortcutEvents,
+                          characterShortcutEvents:
+                              AppflowyEditorUtil.buildCharacterShortcutEvents,
                           commandShortcutEvents:
                               AppflowyEditorUtil.buildCommandShortcutEvents(),
                           blockComponentBuilders:
