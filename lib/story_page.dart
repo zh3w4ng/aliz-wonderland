@@ -53,7 +53,7 @@ class _StoryPageState extends State<StoryPage> {
                       document: Document.fromJson(snapshot.data['doc']))
                   : EditorState.blank();
 
-              return Column(
+              return ListView(
                 children: [
                   appStateProvider.loggedIn()
                       ? IconButton(

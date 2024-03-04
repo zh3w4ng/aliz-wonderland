@@ -34,8 +34,6 @@ class _HomePageState extends State<HomePage> {
   bool _navigationRailVisible = false;
   int _selectedIndex = 0;
   NavigationRailLabelType labelType = NavigationRailLabelType.all;
-  bool showLeading = false;
-  bool showTrailing = false;
   double groupAlignment = -1.0;
 
   Widget _selectDestination() {
@@ -64,7 +62,6 @@ class _HomePageState extends State<HomePage> {
     final appStateProvider = Provider.of<AppStateProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        actions: const [LogInOutModal()],
         leading: IconButton(
           icon: _navigationRailVisible
               ? const Icon(Icons.menu_open)
@@ -102,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                   onDestinationSelected: (int index) =>
                       setState(() => _selectedIndex = index),
                   labelType: labelType,
-                  leading: showLeading
+                  leading: appStateProvider.loggedIn()
                       ? FloatingActionButton(
                           elevation: 0,
                           onPressed: () {
@@ -111,14 +108,12 @@ class _HomePageState extends State<HomePage> {
                           child: const Icon(Icons.add),
                         )
                       : const SizedBox(),
-                  trailing: showTrailing
-                      ? IconButton(
-                          onPressed: () {
-                            // Add your onPressed code here!
-                          },
-                          icon: const Icon(Icons.more_horiz_rounded),
-                        )
-                      : const SizedBox(),
+                  trailing: const Expanded(
+                      child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Padding(
+                              padding: EdgeInsets.only(bottom: 8),
+                              child: LogInOutModal()))),
                   destinations: <NavigationRailDestination>[
                     NavigationRailDestination(
                       icon: const Icon(Icons.cottage_outlined),

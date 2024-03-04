@@ -53,6 +53,7 @@ class _LogInOutModal extends State<LogInOutModal> {
 
     return appStateProvider!.loggedIn()
         ? IconButton(
+            tooltip: 'Log out',
             onPressed: () => showDialog(
                 context: context,
                 builder: (_) => AlertDialog(
@@ -72,6 +73,7 @@ class _LogInOutModal extends State<LogInOutModal> {
                         ])),
             icon: const Icon(Icons.logout_outlined))
         : IconButton(
+            tooltip: 'Log in',
             onPressed: () => showDialog(
                 context: context,
                 builder: (_) => AlertDialog(
