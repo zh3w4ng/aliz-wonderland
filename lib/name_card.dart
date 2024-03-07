@@ -91,11 +91,7 @@ class _NameCardState extends State<NameCard> {
                   color: Theme.of(context).colorScheme.tertiary,
                   onPressed: () {
                     launchUrlString('mailto:zh3w4ng@gmail.com?subject=Hello');
-                  }),
-              IconButton(
-                  icon: const Icon(Icons.book_outlined),
-                  color: Theme.of(context).colorScheme.tertiary,
-                  onPressed: () => context.push("/story/cWsnsrkjYqDCbjoxfbRB")),
+                  })
             ])),
         Positioned(
             top: 144,

@@ -51,7 +51,7 @@ class _LogInOutModal extends State<LogInOutModal> {
   Widget build(BuildContext context) {
     appStateProvider = Provider.of<AppStateProvider>(context);
 
-    return appStateProvider!.loggedIn()
+    return appStateProvider!.appState.loggedIn()
         ? IconButton(
             tooltip: 'Log out',
             onPressed: () => showDialog(

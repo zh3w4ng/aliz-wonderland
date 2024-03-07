@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:wonderland/story_page.dart';
+import 'package:wonderland/new_story_page.dart';
 import 'package:wonderland/theme.dart';
 import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/home_page.dart';
@@ -20,7 +20,6 @@ void main() async {
     await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
     FirebaseFirestore.instance.useFirestoreEmulator('localhost', 8080);
   }
-  GoRouter.optionURLReflectsImperativeAPIs = true;
   runApp(const MyApp());
 }
 
@@ -42,19 +41,25 @@ class _MyAppState extends State<MyApp> {
         builder: (context, _) {
           final appStateProvider = Provider.of<AppStateProvider>(context);
           return MaterialApp.router(
-              title: appStateProvider.title,
-              theme: ThemeData(
-                  colorScheme: MaterialTheme.lightScheme().toColorScheme()),
-              darkTheme: ThemeData(
-                  colorScheme: MaterialTheme.darkScheme().toColorScheme()),
-              themeMode: appStateProvider.themeMode,
-              routerConfig: GoRouter(routes: [
-                GoRoute(
-                    path: '/', builder: (context, routerState) => const HomePage()),
-                GoRoute(
-                    path: '/story/:id',
-                    builder: (context, routerState) => const StoryPage())
-              ]));
+            title: appStateProvider.appState.title,
+            theme: ThemeData(
+                colorScheme: MaterialTheme.lightScheme().toColorScheme()),
+            darkTheme: ThemeData(
+                colorScheme: MaterialTheme.darkScheme().toColorScheme()),
+            themeMode: appStateProvider.appState.themeMode,
+            routerConfig: GoRouter(initialLocation: '/', routes: [
+              GoRoute(
+                  path: '/',
+                  builder: (context, routerState) => HomePage()),
+              GoRoute(
+                  path: '/story/:id',
+                  builder: (context, routerState) =>
+                      HomePage(docId: routerState.pathParameters['id'])),
+              GoRoute(
+                  path: '/story/new',
+                  builder: (context, routerState) => const NewStoryPage()),
+            ]),
+          );
         });
   }
 }
