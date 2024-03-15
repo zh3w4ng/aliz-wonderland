@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:wonderland/new_story_page.dart';
 import 'package:wonderland/theme.dart';
 import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/home_page.dart';
@@ -50,14 +49,11 @@ class _MyAppState extends State<MyApp> {
             routerConfig: GoRouter(initialLocation: '/', routes: [
               GoRoute(
                   path: '/',
-                  builder: (context, routerState) => HomePage()),
+                  builder: (context, routerState) => const HomePage()),
               GoRoute(
                   path: '/story/:id',
                   builder: (context, routerState) =>
                       HomePage(docId: routerState.pathParameters['id'])),
-              GoRoute(
-                  path: '/story/new',
-                  builder: (context, routerState) => const NewStoryPage()),
             ]),
           );
         });

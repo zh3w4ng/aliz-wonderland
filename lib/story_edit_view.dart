@@ -1,35 +1,41 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/appflowy_editor.dart';
+import 'package:wonderland/publish_modal.dart';
 import 'package:wonderland/typography.dart';
 
-class StoryView extends StatefulWidget {
-  StoryView({super.key, this.docId});
+class StoryEditView extends StatefulWidget {
+  const StoryEditView({super.key, required this.docId});
 
-  String? docId;
+  final String docId;
 
   @override
-  State<StoryView> createState() => _StoryViewState();
+  State<StoryEditView> createState() => _StoryEditViewState();
 }
 
-class _StoryViewState extends State<StoryView> {
-  CollectionReference stories =
+class _StoryEditViewState extends State<StoryEditView> {
+  final CollectionReference stories =
       FirebaseFirestore.instance.collection('stories');
-
+  late AppStateProvider appStateProvider;
   EditorState editorState = EditorState.blank(withInitialText: true);
 
   @override
   Widget build(BuildContext context) {
-    final appStateProvider = Provider.of<AppStateProvider>(context);
+    appStateProvider = Provider.of<AppStateProvider>(context);
+    late String title;
+    late String summary;
+    late String url;
 
     return FutureBuilder(
         future: stories.doc(widget.docId).get(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            title = snapshot.data!['title'];
+            summary = snapshot.data!['summary'];
+            url = snapshot.data!['heroImageUrl'];
             editorState =
                 EditorState(document: Document.fromJson(snapshot.data!['doc']));
           }
@@ -38,33 +44,25 @@ class _StoryViewState extends State<StoryView> {
               appStateProvider.appState.loggedIn()
                   ? Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                       IconButton(
-                          tooltip: 'Save as draft',
-                          onPressed: () => stories
-                                  .doc(widget.docId)
-                                  .update({
-                                'doc': editorState.document.toJson(),
-                                'updatedBy':
-                                    appStateProvider.appState.username(),
-                              }),
-                          icon: const Icon(Icons.save)),
-                      IconButton(
                           tooltip: 'Publish',
-                          onPressed: () => stories
-                                  .doc(widget.docId)
-                                  .update({
-                                'doc': editorState.document.toJson(),
-                                'updatedBy':
-                                    appStateProvider.appState.username(),
-                                'published': true,
-                              }),
-                          icon: const Icon(Icons.publish)),
+                          onPressed: () => showDialog(
+                              context: context,
+                              builder: (_) => PublishModal(
+                                    docId: widget.docId,
+                                    document: editorState.document,
+                                    title: title,
+                                    summary: summary,
+                                    heroImageUrl: url,
+                                  )),
+                          icon: const Icon(Icons.publish))
                     ])
                   : const SizedBox(),
               SizedBox(
                   width: double.infinity,
                   height: 800,
                   child: AppFlowyEditor(
-                      editable: appStateProvider.appState.loggedIn() && appStateProvider.appState.editable,
+                      editorStyle: AppflowyEditorUtil.editorStyle(context),
+                      editable: appStateProvider.appState.loggedIn(),
                       editorState: editorState,
                       autoFocus: true,
                       characterShortcutEvents:

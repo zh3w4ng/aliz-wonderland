@@ -10,18 +10,31 @@ class AppStateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void navigate({required int? index}) {
+  void navigate({required int? index,  String? docId, bool? editable}) {
     appState.navigationIndex = index;
+    appState.docId = docId;
+    appState.editable = editable ?? false;
     notifyListeners();
   }
 
-  void goToStory({required String? docId, required bool editable}) {
-    if (docId != null) {
-      appState.navigationIndex = null;
-      appState.docId = docId;
-      appState.editable = editable;
-      notifyListeners();
+  void goToNonStory({required String tab}) {
+    switch (tab) {
+      case 'home':
+        navigate(index: 0);
+        break;
+      case 'experience':
+        navigate(index: 1);
+        break;
+      case 'stories':
+        navigate(index: 2);
+        break;
+      default:
+        navigate(index: 0);
     }
+  }
+
+  void goToStory({required String? docId, required bool editable}) {
+    navigate(index: null, docId: docId, editable: editable);
   }
 
   Future<void> logIn({required String email, required String password}) {
