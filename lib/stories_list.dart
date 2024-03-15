@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/typography.dart';
+import 'package:wonderland/footer.dart';
 
 class StoriesList extends StatefulWidget {
   const StoriesList({super.key});
@@ -129,21 +130,27 @@ class _StoriesListState extends State<StoriesList> {
   }
 
   Widget _builStory(
-      BuildContext context, String id, Map<String, dynamic> node) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          _buildListTile(
+      {required BuildContext context,
+      required String id,
+      required Map<String, dynamic> node,
+      required bool lastOne}) {
+    return lastOne
+        ? Column(children: [
+            _buildListTile(
+              context: context,
+              height: 32,
+              node: node,
+              id: id,
+            ),
+            const Divider(height: 8),
+            const Footer(height: 24)
+          ])
+        : _buildListTile(
             context: context,
             height: 32,
             node: node,
             id: id,
-          ),
-          const SizedBox(
-            height: 8,
-          )
-        ]);
+          );
   }
 
   @override
@@ -176,11 +183,14 @@ class _StoriesListState extends State<StoriesList> {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
                   final entry = snapshot.data![index];
-                  return _builStory(context, entry['id'] as String,
-                      entry['node'] as Map<String, dynamic>);
+                  return _builStory(
+                      context: context,
+                      id: entry['id'],
+                      node: entry['node'],
+                      lastOne: index == snapshot.data!.length - 1);
                 },
                 separatorBuilder: (context, index) {
-                  return const Divider();
+                  return const Divider(height: 8);
                 },
               )
             : const SizedBox());

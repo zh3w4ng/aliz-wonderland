@@ -5,7 +5,6 @@ import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/appflowy_editor.dart';
 import 'package:wonderland/publish_modal.dart';
-import 'package:wonderland/typography.dart';
 
 class StoryEditView extends StatefulWidget {
   const StoryEditView({super.key, required this.docId});

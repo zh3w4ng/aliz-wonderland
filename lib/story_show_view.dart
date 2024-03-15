@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:appflowy_editor/appflowy_editor.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import 'package:wonderland/appflowy_editor.dart';
-import 'package:wonderland/typography.dart';
+import 'package:wonderland/footer.dart';
 
 class StoryShowView extends StatefulWidget {
   const StoryShowView({super.key, required this.docId});
@@ -46,7 +44,9 @@ class _StoryShowViewState extends State<StoryShowView> {
                           AppflowyEditorUtil.buildCommandShortcutEvents(),
                       blockComponentBuilders:
                           AppflowyEditorUtil.buildBlockComponentBuilders(
-                              editorState)))
+                              editorState))),
+              const Divider(),
+              const Footer(height: 24)
             ],
           );
         });

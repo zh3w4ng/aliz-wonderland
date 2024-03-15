@@ -18,6 +18,7 @@ import 'package:wonderland/story_show_view.dart';
 import 'package:wonderland/tools_word_cloud.dart';
 import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/typography.dart';
+import 'package:wonderland/footer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, this.docId}) : super(key: key);
@@ -67,7 +68,9 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 8),
               CompaniesSwiper(),
               ToolsWordCloud(),
-              SizedBox(height: 16)
+              SizedBox(height: 8),
+              Divider(),
+              Footer(height: 24)
             ]);
     }
   }
@@ -206,7 +209,7 @@ class _HomePageState extends State<HomePage> {
         Expanded(
             child: Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16),
-                child: _selectNavigationIndex(appStateProvider.appState)))
+                child: _selectNavigationIndex(appStateProvider.appState))),
       ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
