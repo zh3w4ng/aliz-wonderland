@@ -14,10 +14,11 @@ class ImportModal extends StatelessWidget {
     appStateProvider.logOut().catchError((error) {
       if (error is FirebaseAuthException) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Theme.of(context).colorScheme.errorContainer,
             content: Text(
-          error.message!,
-          style: TypographyUtil.labelMedium(context),
-        )));
+              error.message!,
+              style: TypographyUtil.snackBarErrorLabelMedium(context),
+            )));
       }
     });
   }

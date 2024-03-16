@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                     (_) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(
                           'Imported successfully.',
-                          style: TypographyUtil.labelMedium(context),
+                          style: TypographyUtil.snackBarLabelMedium(context),
                         ))));
               }
             });

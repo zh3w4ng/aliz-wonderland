@@ -54,7 +54,7 @@ class _PublishModalState extends State<PublishModal> {
             .then((_) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(
                   'Published successfully.',
-                  style: TypographyUtil.labelMedium(context),
+                  style: TypographyUtil.snackBarLabelMedium(context),
                 ))))
             .then((_) => appStateProvider
                 .goToStory(docId: widget.docId, editable: false));
@@ -74,7 +74,7 @@ class _PublishModalState extends State<PublishModal> {
             .then((_) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text(
                   'Published successfully.',
-                  style: TypographyUtil.labelMedium(context),
+                  style: TypographyUtil.snackBarLabelMedium(context),
                 ))))
             .then((_) => appStateProvider
                 .goToStory(docId: widget.docId, editable: false));

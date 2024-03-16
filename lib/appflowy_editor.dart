@@ -45,9 +45,7 @@ class AppflowyEditorUtil {
 
   static EditorStyle editorStyle(BuildContext context) {
     return EditorStyle(
-      padding: PlatformExtension.isDesktopOrWeb
-          ? const EdgeInsets.only(left: 100, right: 100, top: 20)
-          : const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.all(0),
       cursorColor: Colors.green,
       dragHandleColor: Colors.green,
       selectionColor: Colors.green,

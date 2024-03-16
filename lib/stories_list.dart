@@ -32,7 +32,7 @@ class _StoriesListState extends State<StoriesList> {
               .then((_) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
                     "Story URL is copied to clipboard successfully.",
-                    style: TypographyUtil.labelMedium(context),
+                    style: TypographyUtil.snackBarLabelMedium(context),
                   ))));
         });
   }
@@ -63,7 +63,7 @@ class _StoriesListState extends State<StoriesList> {
             stories.doc(id).delete().then((value) =>
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text("Story is deleted successfully.",
-                        style: TypographyUtil.labelMedium(context)))));
+                        style: TypographyUtil.snackBarLabelMedium(context)))));
         }
       },
       itemBuilder: (context) => [

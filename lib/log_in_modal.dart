@@ -7,7 +7,7 @@ import 'package:wonderland/typography.dart';
 
 class LogInModal extends StatelessWidget {
   LogInModal({Key? key}) : super(key: key);
- 
+
   final _formKey = GlobalKey<FormState>();
   late String username;
   late String password;
@@ -21,10 +21,11 @@ class LogInModal extends StatelessWidget {
           .catchError((error) {
         if (error is FirebaseAuthException) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              backgroundColor: Theme.of(context).colorScheme.errorContainer,
               content: Text(
-            error.message!,
-            style: TypographyUtil.labelMedium(context),
-          )));
+                error.message!,
+                style: TypographyUtil.snackBarErrorLabelMedium(context),
+              )));
         }
       });
     }
