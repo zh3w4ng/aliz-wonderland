@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
         Expanded(
             child: Padding(
                 padding: MediaQuery.of(context).size.width > 600
-                    ? const EdgeInsets.symmetric(horizontal: 100)
+                    ? const EdgeInsets.symmetric(horizontal: 40)
                     : const EdgeInsets.symmetric(horizontal: 20),
                 child: _selectNavigationIndex(appStateProvider.appState))),
       ]),
