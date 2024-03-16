@@ -207,7 +207,9 @@ class _HomePageState extends State<HomePage> {
                     destinations: _buildNavigatioinRailDestinations(context)))),
         Expanded(
             child: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
+                padding: MediaQuery.of(context).size.width > 600
+                  ? const EdgeInsets.symmetric(horizontal: 100)
+                  : const EdgeInsets.symmetric(horizontal: 20),
                 child: _selectNavigationIndex(appStateProvider.appState))),
       ]),
       floatingActionButton: FloatingActionButton(
