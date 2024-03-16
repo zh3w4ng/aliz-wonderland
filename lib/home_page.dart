@@ -154,19 +154,24 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     appStateProvider = Provider.of<AppStateProvider>(context);
+    if (MediaQuery.of(context).size.width > 600) {
+      _navigationRailVisible = true;
+    }
     if (widget.docId != null) {
       appStateProvider.goToStory(docId: widget.docId, editable: true);
     }
     return Scaffold(
       appBar: AppBar(
         leading: appStateProvider.appState.navigationIndex != null
-            ? IconButton(
-                icon: _navigationRailVisible
-                    ? const Icon(Icons.menu_open)
-                    : const Icon(Icons.menu),
-                color: Theme.of(context).colorScheme.primary,
-                onPressed: () => setState(
-                    () => _navigationRailVisible = !_navigationRailVisible))
+            ? (MediaQuery.of(context).size.width > 600
+                ? const SizedBox()
+                : IconButton(
+                    icon: _navigationRailVisible
+                        ? const Icon(Icons.menu_open)
+                        : const Icon(Icons.menu),
+                    color: Theme.of(context).colorScheme.primary,
+                    onPressed: () => setState(() =>
+                        _navigationRailVisible = !_navigationRailVisible)))
             : IconButton(
                 onPressed: () => appStateProvider.goToNonStory(tab: 'stories'),
                 icon: const Icon(Icons.arrow_back)),
@@ -199,7 +204,8 @@ class _HomePageState extends State<HomePage> {
                     leading: appStateProvider.appState.loggedIn()
                         ? FloatingActionButton(
                             elevation: 0,
-                            onPressed: () => appStateProvider.goToStory(docId: null, editable: true),
+                            onPressed: () => appStateProvider.goToStory(
+                                docId: null, editable: true),
                             child: const Icon(Icons.add),
                           )
                         : const SizedBox(),
@@ -208,8 +214,8 @@ class _HomePageState extends State<HomePage> {
         Expanded(
             child: Padding(
                 padding: MediaQuery.of(context).size.width > 600
-                  ? const EdgeInsets.symmetric(horizontal: 100)
-                  : const EdgeInsets.symmetric(horizontal: 20),
+                    ? const EdgeInsets.symmetric(horizontal: 100)
+                    : const EdgeInsets.symmetric(horizontal: 20),
                 child: _selectNavigationIndex(appStateProvider.appState))),
       ]),
       floatingActionButton: FloatingActionButton(
