@@ -69,8 +69,7 @@ class _HomePageState extends State<HomePage> {
               CompaniesSwiper(),
               ToolsWordCloud(),
               SizedBox(height: 8),
-              Divider(),
-              Footer(height: 24)
+              Footer(height: 32)
             ]);
     }
   }
