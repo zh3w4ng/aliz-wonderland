@@ -56,7 +56,7 @@ class _StoryShowViewState extends State<StoryShowView> {
                         onPressed: () {
                           Clipboard.setData(ClipboardData(
                                   text:
-                                      "https://aliz-in-wonderland/#/story/${widget.docId}"))
+                                      "https://aliz-in-wonderland.com/#/story/${widget.docId}"))
                               .then((_) => ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
                                           content: Text(
