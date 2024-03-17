@@ -90,7 +90,7 @@ class _NameCardState extends State<NameCard> {
                   color: Theme.of(context).colorScheme.tertiary,
                   onPressed: () {
                     launchUrlString('mailto:zh3w4ng@gmail.com?subject=Hello');
-                  }),
+                  })
             ])),
         Positioned(
             top: 144,

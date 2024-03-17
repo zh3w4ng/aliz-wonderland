@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/services.dart';
 import 'package:timelines_plus/timelines_plus.dart';
 import 'package:wonderland/typography.dart';
+import 'package:wonderland/footer.dart';
 
 class ExperienceCards extends StatefulWidget {
   const ExperienceCards({super.key});
@@ -80,8 +81,10 @@ class _ExperienceCardsState extends State<ExperienceCards> {
     ));
   }
 
-  Card _builCard(BuildContext context, Map<String, dynamic> entry) {
-    return Card(
+  Widget _builCard({required BuildContext context, required Map<String, dynamic> entry, required bool lastOne}) {
+    
+    
+    Card card = Card(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -90,10 +93,18 @@ class _ExperienceCardsState extends State<ExperienceCards> {
               context, 32, entry['logo'], entry['title'], entry['company']),
           _buildSummaryColumn(context, entry['summary']),
           _buildKeywordsRow(context, entry['keywords']),
-          const SizedBox(
+           const SizedBox(
             height: 8,
           )
         ]));
+      if (lastOne) {
+        return Column(children: [card, const SizedBox(
+            height: 8,
+          ), const Footer(height: 24)]);
+      } else {
+        return card;
+      }
+
   }
 
   @override
@@ -115,7 +126,7 @@ class _ExperienceCardsState extends State<ExperienceCards> {
                       snapshot.data![index]['to'],
                       snapshot.data![index]['from']),
                   contentsBuilder: (context, index) =>
-                      _builCard(context, snapshot.data![index]),
+                      _builCard(context: context, entry:  snapshot.data![index], lastOne: index == snapshot.data!.length - 1),
                   itemCount: snapshot.data!.length,
                 ),
               ))
