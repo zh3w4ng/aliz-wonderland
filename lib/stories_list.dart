@@ -142,8 +142,9 @@ class _StoriesListState extends State<StoriesList> {
               node: node,
               id: id,
             ),
-            const Divider(height: 8),
-            const Footer(height: 24)
+            // add the two lines below back when there're more stories.
+            // const Divider(height: 8),
+            // const Footer(height: 24)
           ])
         : _buildListTile(
             context: context,
