@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
       _navigationRailVisible = true;
     }
     if (widget.docId != null) {
-      appStateProvider.goToStory(docId: widget.docId, editable: true);
+      appStateProvider.goToStory(docId: widget.docId, editable: false);
     }
     return Scaffold(
       appBar: AppBar(
