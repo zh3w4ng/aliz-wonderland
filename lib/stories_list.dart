@@ -28,7 +28,7 @@ class _StoriesListState extends State<StoriesList> {
         icon: const Icon(Icons.share),
         onPressed: () {
           Clipboard.setData(
-                  ClipboardData(text: "https://aliz-in-wonderland/#/story/$id"))
+                  ClipboardData(text: "https://aliz-in-wonderland.com/#/story/$id"))
               .then((_) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(
                     "Story URL is copied to clipboard successfully.",
