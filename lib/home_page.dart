@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage> {
   final double groupAlignment = -1.0;
   final stories = FirebaseFirestore.instance.collection('stories');
   late AppStateProvider appStateProvider;
+  final analytics = FirebaseAnalytics.instance;
 
   Widget _selectNavigationIndex(AppState appState) {
     switch (appState.navigationIndex) {
@@ -53,13 +55,20 @@ class _HomePageState extends State<HomePage> {
         } else if (appState.editable) {
           return StoryEditView(docId: appState.docId!);
         } else {
+          analytics.logScreenView(screenName: 'Story Show');
+          analytics
+              .logViewItem(parameters: {'id': appState.docId});
           return StoryShowView(docId: appState.docId!);
         }
       case 2:
+        analytics.logScreenView(screenName: 'Story List');
+        analytics.logViewItemList();
         return const StoriesList();
       case 1:
+        analytics.logScreenView(screenName: 'Experience');
         return const ExperienceCards();
       default:
+        analytics.logScreenView(screenName: 'Home');
         return ListView(
             physics: const BouncingScrollPhysics(),
             children: const <Widget>[
