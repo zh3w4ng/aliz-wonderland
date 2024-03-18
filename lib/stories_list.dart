@@ -108,7 +108,7 @@ class _StoriesListState extends State<StoriesList> {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
                 "updated at ${DateFormat.yMMMd('en_US').add_jm().format(ts.toDate())}",
-                style: TypographyUtil.keywordsList(context)),
+                style: TypographyUtil.labelSmall(context)),
             Text(summary, style: TypographyUtil.keywordsList(context)),
           ]));
     } else {
@@ -123,7 +123,7 @@ class _StoriesListState extends State<StoriesList> {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Text(
                 "updated at ${DateFormat.yMMMd('en_US').add_jm().format(ts.toDate())}",
-                style: TypographyUtil.keywordsList(context)),
+                style: TypographyUtil.labelSmall(context)),
             Text(summary, style: TypographyUtil.keywordsList(context)),
           ]));
     }
