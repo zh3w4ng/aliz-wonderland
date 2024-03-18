@@ -13,7 +13,6 @@ class _UnderConstructionCardState extends State<UnderConstructionCard> {
   @override
   Widget build(BuildContext context) {
     double height = 600;
-    double width = MediaQuery.of(context).size.width;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),

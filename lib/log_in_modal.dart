@@ -11,7 +11,7 @@ class LogInModal extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   late String username;
   late String password;
-  late final AppStateProvider appStateProvider;
+  late AppStateProvider appStateProvider;
 
   void submitLogIn(BuildContext context) {
     if (_formKey.currentState!.validate()) {

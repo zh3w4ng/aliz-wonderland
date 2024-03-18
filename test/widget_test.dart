@@ -7,24 +7,31 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:wonderland/app_state_provider.dart';
 
-import 'package:wonderland/main.dart';
+import 'package:wonderland/log_in_modal.dart';
+import 'package:provider/provider.dart';
 
+// Annotation which generates the cat.mocks.dart library and the MockCat class.
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Login Modal test', (WidgetTester tester) async {
+    await tester.pumpWidget((MaterialApp(
+        title: 'Firestore Example',
+        home: ChangeNotifierProvider(
+            create: (context) => AppStateProvider(),
+            builder: (context, _) => LogInModal()))));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('Username'), findsOneWidget);
+    expect(find.text('Password'), findsOneWidget);
+
+    expect(find.bySubtype<ElevatedButton>(), findsExactly(2));
 
     // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    await tester.tap(find.bySubtype<ElevatedButton>().first);
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // // Verify that our counter has incremented.
+    expect(find.text('Please enter your password'), findsOneWidget);
+    expect(find.text('Please enter your email address'), findsOneWidget);
   });
 }
