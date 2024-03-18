@@ -168,7 +168,6 @@ class _StoriesListState extends State<StoriesList> {
               .toList());
     } else {
       page = stories
-          .where('published', isEqualTo: true)
           .orderBy('updatedAt', descending: true)
           .limit(10)
           .get()
