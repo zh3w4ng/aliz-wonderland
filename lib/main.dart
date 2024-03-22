@@ -31,7 +31,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  final AppStateProvider _appStateProvider = AppStateProvider();
+  final AppStateProvider _appStateProvider = AppStateProvider(auth: FirebaseAuth.instance);
 
   @override
   Widget build(BuildContext context) {

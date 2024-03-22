@@ -8,7 +8,7 @@ import 'package:wonderland/typography.dart';
 class ImportModal extends StatelessWidget {
   ImportModal({Key? key}) : super(key: key);
 
-  late final AppStateProvider appStateProvider;
+  late AppStateProvider appStateProvider;
 
   void submitLogOut(BuildContext context) {
     appStateProvider.logOut().catchError((error) {

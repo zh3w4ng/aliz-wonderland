@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/typography.dart';
-import 'package:wonderland/footer.dart';
+// import 'package:wonderland/footer.dart';
 
 class StoriesList extends StatefulWidget {
   const StoriesList({super.key});
