@@ -3,6 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wonderland/app_state.dart';
 
 class AppStateProvider extends ChangeNotifier {
+  AppStateProvider({required this.auth}) : super();
+
+  final FirebaseAuth auth;
   AppState appState = AppState();
 
   void toggleThemeMode(bool dark) {
@@ -10,7 +13,7 @@ class AppStateProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void navigate({required int? index,  String? docId, bool? editable}) {
+  void navigate({required int? index, String? docId, bool? editable}) {
     appState.navigationIndex = index;
     appState.docId = docId;
     appState.editable = editable ?? false;
@@ -37,17 +40,22 @@ class AppStateProvider extends ChangeNotifier {
     navigate(index: null, docId: docId, editable: editable);
   }
 
-  Future<void> logIn({required String email, required String password}) {
-    return FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password)
-        .then((value) {
-      appState.user = value.user;
-      notifyListeners();
-    });
+  Future<String> logIn({required String email, required String password}) {
+    try {
+      return auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        appState.user = value.user;
+        notifyListeners();
+        return "";
+      });
+    } on FirebaseAuthException catch (error) {
+      return Future.value(error.message);
+    }
   }
 
   Future<void> logOut() async {
-    await FirebaseAuth.instance.signOut();
+    await auth.signOut();
     appState.user = null;
     notifyListeners();
   }

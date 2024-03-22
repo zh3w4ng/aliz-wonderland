@@ -18,12 +18,12 @@ class LogInModal extends StatelessWidget {
       _formKey.currentState!.save();
       appStateProvider
           .logIn(email: username, password: password)
-          .catchError((error) {
-        if (error is FirebaseAuthException) {
+          .then((message) {
+        if (message.isNotEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Theme.of(context).colorScheme.errorContainer,
               content: Text(
-                error.message!,
+                message,
                 style: TypographyUtil.snackBarErrorLabelMedium(context),
               )));
         }
