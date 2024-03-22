@@ -25,7 +25,7 @@ void main() {
         title: 'Firestore Example',
         home: ChangeNotifierProvider(
             create: (context) => AppStateProvider(auth: auth),
-            builder: (context, _) => LogInModal()));
+            builder: (context, _) => Scaffold(body: LogInModal())));
   }
 
   testWidgets('Login Modal - form validation', (WidgetTester tester) async {
@@ -61,37 +61,30 @@ void main() {
     expect(find.text('Please enter your password'), findsOneWidget);
   });
 
-  testWidgets('Login Modal - login auth fail', (WidgetTester tester) async {
+  testWidgets('Login Modal - auth fail', (WidgetTester tester) async {
     const email = 'bob@somedomain.com';
     const wrongPassword = 'wrongPassword';
-    const correctPassword = 'correctPassword';
-    final user = MockUser();
     final auth = MockFirebaseAuth();
-    final credential = MockUserCredential();
 
-    when(() => credential.user).thenReturn(user);
     when(() => auth.signInWithEmailAndPassword(
             email: email, password: wrongPassword))
         .thenThrow(FirebaseAuthException(code: 'code', message: 'message'));
-    when(() => auth.signInWithEmailAndPassword(
-        email: email,
-        password: correctPassword)).thenAnswer((_) => Future.value(credential));
-
+ 
     await tester.pumpWidget(buildMaterialApp(auth: auth));
 
-    // // Key in the wrong password
-    // await tester.enterText(find.byType(TextFormField).first, email);
-    // await tester.enterText(find.byType(TextFormField).last, wrongPassword);
+    // Key in the wrong password
+    await tester.enterText(find.byType(TextFormField).first, email);
+    await tester.enterText(find.byType(TextFormField).last, wrongPassword);
 
-    // // Click Okay button to login
-    // await tester.tap(find.bySubtype<ElevatedButton>().first);
-    // await tester.pump();
+    // Click Okay button to login
+    await tester.tap(find.bySubtype<ElevatedButton>().first);
+    await tester.pump();
 
-    // // Verify SnackBar which has the error message
-    // expect(find.byType(SnackBar), findsOne);
+    // Verify SnackBar which has the error message
+    expect(find.byType(SnackBar), findsOne);
   });
 
-  testWidgets('Login Modal - login auth success', (WidgetTester tester) async {
+  testWidgets('Login Modal - auth success', (WidgetTester tester) async {
     const email = 'bob@somedomain.com';
     const correctPassword = 'correctPassword';
     final user = MockUser();
