@@ -47,7 +47,6 @@ class _HomePageState extends State<HomePage> {
   final stories = FirebaseFirestore.instance.collection('stories');
   late AppStateProvider appStateProvider;
   late FirebaseAnalytics? analytics;
-  
 
   Widget _selectNavigationIndex(AppState appState) {
     if (kReleaseMode) {
@@ -103,21 +102,31 @@ class _HomePageState extends State<HomePage> {
               if (result != null) {
                 final Map node = json
                     .decode(utf8.decode(result.files.single.bytes!.toList()));
-                stories.add({
-                  'doc': node['doc'],
-                  'creadedAt': DateTime.now(),
-                  'updatedAt': DateTime.now(),
-                  'updatedBy': appStateProvider.appState.username(),
-                  'published': true,
-                  'title': node['title'],
-                  'summary': node['summary'],
-                  'heroImageUrl': node['heroImageUrl'],
-                }).then(
-                    (_) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                          'Imported successfully.',
-                          style: TypographyUtil.snackBarLabelMedium(context),
-                        ))));
+                try {
+                  stories.add({
+                    'doc': node['doc'],
+                    'creadedAt': DateTime.now(),
+                    'updatedAt': DateTime.now(),
+                    'updatedBy': appStateProvider.appState.username(),
+                    'published': true,
+                    'title': node['title'],
+                    'summary': node['summary'],
+                    'heroImageUrl': node['heroImageUrl'],
+                  }).then((_) =>
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                        'Imported successfully.',
+                        style: TypographyUtil.snackBarLabelMedium(context),
+                      ))));
+                } on FirebaseException catch (error) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      backgroundColor:
+                          Theme.of(context).colorScheme.errorContainer,
+                      content: Text(
+                        error.message!,
+                        style: TypographyUtil.snackBarErrorLabelMedium(context),
+                      )));
+                }
               }
             });
         }
