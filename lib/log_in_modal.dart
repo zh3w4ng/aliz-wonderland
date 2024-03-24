@@ -26,6 +26,12 @@ class LogInModal extends StatelessWidget {
                 message,
                 style: TypographyUtil.snackBarErrorLabelMedium(context),
               )));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+            'Logged in successfully.',
+            style: TypographyUtil.snackBarLabelMedium(context),
+          )));
         }
       });
     }

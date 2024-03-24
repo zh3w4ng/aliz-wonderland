@@ -61,6 +61,9 @@ class _StoryEditViewState extends State<StoryEditView> {
                                   onPressed: () => showDialog(
                                       context: context,
                                       builder: (_) => PublishModal(
+                                            stories: stories,
+                                            username: appStateProvider.appState
+                                                .username(),
                                             docId: widget.docId,
                                             document: editorState.document,
                                             title: title!,
@@ -87,7 +90,8 @@ class _StoryEditViewState extends State<StoryEditView> {
                                       .showSnackBar(SnackBar(
                                           content: Text(
                                     "Story URL is copied to clipboard successfully.",
-                                    style: TypographyUtil.snackBarLabelMedium(context),
+                                    style: TypographyUtil.snackBarLabelMedium(
+                                        context),
                                   ))));
                         })
                   ]),

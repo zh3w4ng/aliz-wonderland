@@ -55,8 +55,9 @@ class AppStateProvider extends ChangeNotifier {
   }
 
   Future<void> logOut() async {
-    await auth.signOut();
-    appState.user = null;
-    notifyListeners();
+    auth
+        .signOut()
+        .then((_) => appState.user = null)
+        .then((_) => notifyListeners());
   }
 }
