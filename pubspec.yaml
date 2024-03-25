@@ -61,7 +61,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
-  mocktail: ^1.0.3
+  build_runner: ^2.4.8
+  mockito: ^5.4.4
   firebase_auth_mocks: ^0.13.0
   mock_exceptions: ^0.8.2
 

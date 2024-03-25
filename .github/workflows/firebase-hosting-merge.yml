@@ -19,8 +19,15 @@ jobs:
         run: flutter pub get
       - name: Build web
         run: flutter build web --web-renderer canvaskit --release
+      - name: Generate Mock code
+        run: flutter pub run build_runner build
       - name: test
         run: flutter test
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: zh3w4ng/aliz-wonderland
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

@@ -5,7 +5,8 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,12 +14,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/log_in_modal.dart';
 
-class MockFirebaseAuth extends Mock implements FirebaseAuth {}
+import 'log_out_modal_test.mocks.dart';
 
-class MockUserCredential extends Mock implements UserCredential {}
-
-class MockUser extends Mock implements User {}
-
+@GenerateMocks([FirebaseAuth, UserCredential, User])
 void main() {
   MaterialApp buildMaterialApp({required FirebaseAuth auth}) {
     return MaterialApp(
@@ -66,9 +64,9 @@ void main() {
     const wrongPassword = 'wrongPassword';
     final auth = MockFirebaseAuth();
 
-    when(() => auth.signInWithEmailAndPassword(
+    when(auth.signInWithEmailAndPassword(
             email: email, password: wrongPassword))
-        .thenThrow(FirebaseAuthException(code: 'code', message: 'message'));
+        .thenThrow(FirebaseAuthException(code: 'code', message: 'error message'));
  
     await tester.pumpWidget(buildMaterialApp(auth: auth));
 
@@ -81,7 +79,7 @@ void main() {
     await tester.pump();
 
     // Verify SnackBar which has the error message
-    expect(find.byType(SnackBar), findsOne);
+    expect(find.text('error message'), findsOne);
   });
 
   testWidgets('Login Modal - auth success', (WidgetTester tester) async {
@@ -91,8 +89,8 @@ void main() {
     final auth = MockFirebaseAuth();
     final credential = MockUserCredential();
 
-    when(() => credential.user).thenReturn(user);
-    when(() => auth.signInWithEmailAndPassword(
+    when(credential.user).thenReturn(user);
+    when(auth.signInWithEmailAndPassword(
         email: email,
         password: correctPassword)).thenAnswer((_) => Future.value(credential));
 
@@ -106,6 +104,6 @@ void main() {
     await tester.pump();
 
     // Verify SnackBar which has the error message
-    expect(find.byType(SnackBar), findsNothing);
+    expect(find.text('Logged in successfully.'), findsOne);
   });
 }

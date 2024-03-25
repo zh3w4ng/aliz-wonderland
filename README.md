@@ -1,4 +1,5 @@
 # wonderland
+[![codecov](https://codecov.io/github/zh3w4ng/aliz-wonderland/graph/badge.svg?token=PNNQRUUEVI)](https://codecov.io/github/zh3w4ng/aliz-wonderland)
 
 A new Flutter project and perosnal website: [aliz-in-wonderland.com](aliz-in-wonderland.com)
 

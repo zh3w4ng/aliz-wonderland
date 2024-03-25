@@ -10,17 +10,23 @@ class LogOutModal extends StatelessWidget {
 
   late AppStateProvider appStateProvider;
 
-  void submitLogOut(BuildContext context) {
-    appStateProvider.logOut().catchError((error) {
-      if (error is FirebaseAuthException) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Theme.of(context).colorScheme.errorContainer,
-            content: Text(
-              error.message!,
-              style: TypographyUtil.snackBarErrorLabelMedium(context),
-            )));
-      }
-    });
+  Future<void> submitLogOut(BuildContext context) async {
+    try {
+      await appStateProvider
+          .logOut()
+          .then((_) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(
+                'Logged out successfully.',
+                style: TypographyUtil.snackBarLabelMedium(context),
+              ))));
+    } on FirebaseAuthException catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Theme.of(context).colorScheme.errorContainer,
+          content: Text(
+            error.message!,
+            style: TypographyUtil.snackBarErrorLabelMedium(context),
+          )));
+    }
   }
 
   @override

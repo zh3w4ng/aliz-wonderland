@@ -5,20 +5,18 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:mocktail/mocktail.dart';
+// import 'package:mocktail/mocktail.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/log_out_modal.dart';
+import 'log_out_modal_test.mocks.dart';
 
-class MockFirebaseAuth extends Mock implements FirebaseAuth {}
-
-class MockUserCredential extends Mock implements UserCredential {}
-
-class MockUser extends Mock implements User {}
-
+@GenerateMocks([FirebaseAuth, UserCredential, User])
 void main() {
   MaterialApp buildMaterialApp({required FirebaseAuth auth}) {
     return MaterialApp(
@@ -31,8 +29,8 @@ void main() {
   testWidgets('Logout Modal - auth fail', (WidgetTester tester) async {
     final auth = MockFirebaseAuth();
 
-    when(() => auth.signOut())
-        .thenThrow(FirebaseAuthException(code: 'code', message: 'message'));
+    when(auth.signOut())
+        .thenThrow(FirebaseAuthException(code: 'code', message: 'error message'));
 
     await tester.pumpWidget(buildMaterialApp(auth: auth));
 
@@ -41,7 +39,7 @@ void main() {
     await tester.pump();
 
     // Verify SnackBar which has the error message
-    expect(find.byType(SnackBar), findsOne);
+    expect(find.text('error message'), findsOne);
   });
 
   testWidgets('Logout Modal - auth success', (WidgetTester tester) async {
@@ -49,8 +47,8 @@ void main() {
     final auth = MockFirebaseAuth();
     final credential = MockUserCredential();
 
-    when(() => credential.user).thenReturn(user);
-    when(() => auth.signOut()).thenAnswer((_) => Future.value(null));
+    when(credential.user).thenReturn(user);
+    when(auth.signOut()).thenAnswer((_) => Future.value(null));
 
     await tester.pumpWidget(buildMaterialApp(auth: auth));
 
@@ -59,6 +57,6 @@ void main() {
     await tester.pump();
 
     // Verify SnackBar which has the error message
-    expect(find.byType(SnackBar), findsNothing);
+    expect(find.text('Logged out successfully.'), findsOne);
   });
 }

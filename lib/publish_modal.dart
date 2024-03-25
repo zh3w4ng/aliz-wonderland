@@ -9,6 +9,8 @@ import 'package:wonderland/typography.dart';
 class PublishModal extends StatefulWidget {
   PublishModal(
       {Key? key,
+      required this.username,
+      required this.stories,
       required this.docId,
       required this.document,
       required this.title,
@@ -17,12 +19,13 @@ class PublishModal extends StatefulWidget {
       : super(key: key);
 
   final Document document;
+  String username;
   String title;
   String summary;
   String heroImageUrl;
   String? docId;
+  CollectionReference stories;
   final formKey = GlobalKey<FormState>();
-  final stories = FirebaseFirestore.instance.collection('stories');
 
   @override
   State<StatefulWidget> createState() => _PublishModalState();
@@ -35,35 +38,23 @@ class _PublishModalState extends State<PublishModal> {
   late String url;
   bool publish = false;
 
-  void submitPublish(BuildContext context) {
+  void publishStory(BuildContext context) {
+    if (widget.docId != null) {
+      publishOld(context);
+    } else {
+      publishNew(context);
+    }
+  }
+
+  Future<void> publishNew(BuildContext context) async {
     if (widget.formKey.currentState!.validate()) {
       widget.formKey.currentState!.save();
-
-      if (widget.docId != null) {
-        widget.stories
-            .doc(widget.docId)
-            .update({
-              'doc': widget.document.toJson(),
-              'updatedBy': appStateProvider.appState.username(),
-              'updatedAt': DateTime.now(),
-              'published': publish,
-              'title': title,
-              'summary': summary,
-              'heroImageUrl': url,
-            })
-            .then((_) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(
-                  'Published successfully.',
-                  style: TypographyUtil.snackBarLabelMedium(context),
-                ))))
-            .then((_) => appStateProvider
-                .goToStory(docId: widget.docId, editable: false));
-      } else {
-        widget.stories
+      try {
+        await widget.stories
             .add({
               'createdAt': DateTime.now(),
               'doc': widget.document.toJson(),
-              'updatedBy': appStateProvider.appState.username(),
+              'updatedBy': widget.username,
               'updatedAt': DateTime.now(),
               'published': publish,
               'title': title,
@@ -76,8 +67,48 @@ class _PublishModalState extends State<PublishModal> {
                   'Published successfully.',
                   style: TypographyUtil.snackBarLabelMedium(context),
                 ))))
-            .then((_) => appStateProvider
-                .goToStory(docId: widget.docId, editable: false));
+            .then((_) => appStateProvider.goToStory(
+                docId: widget.docId, editable: false));
+      } on FirebaseException catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Theme.of(context).colorScheme.errorContainer,
+            content: Text(
+              error.message!,
+              style: TypographyUtil.snackBarErrorLabelMedium(context),
+            )));
+      }
+    }
+  }
+
+  void publishOld(BuildContext context) {
+    if (widget.formKey.currentState!.validate()) {
+      widget.formKey.currentState!.save();
+      try {
+        widget.stories
+            .doc(widget.docId)
+            .update({
+              'doc': widget.document.toJson(),
+              'updatedBy': widget.username,
+              'updatedAt': DateTime.now(),
+              'published': publish,
+              'title': title,
+              'summary': summary,
+              'heroImageUrl': url,
+            })
+            .then((_) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(
+                  'Published successfully.',
+                  style: TypographyUtil.snackBarLabelMedium(context),
+                ))))
+            .then((_) => appStateProvider.goToStory(
+                docId: widget.docId, editable: false));
+      } on FirebaseException catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Theme.of(context).colorScheme.errorContainer,
+            content: Text(
+              error.message!,
+              style: TypographyUtil.snackBarErrorLabelMedium(context),
+            )));
       }
     }
   }
@@ -85,13 +116,13 @@ class _PublishModalState extends State<PublishModal> {
   @override
   Widget build(BuildContext context) {
     appStateProvider = Provider.of<AppStateProvider>(context);
-    
+
     return AlertDialog(
         title: Text(publish ? 'Publish' : 'Save as Draft',
             style: TypographyUtil.titleLarge(context)),
         actions: [
           ElevatedButton(
-            onPressed: () => submitPublish(context),
+            onPressed: () => publishStory(context),
             child: Text('OK', style: TypographyUtil.labelMedium(context)),
           ),
           ElevatedButton(
@@ -137,7 +168,7 @@ class _PublishModalState extends State<PublishModal> {
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
                   onSaved: (value) => summary = value!,
-                  onEditingComplete: () => submitPublish(context),
+                  onEditingComplete: () => publishStory(context),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter the summary';

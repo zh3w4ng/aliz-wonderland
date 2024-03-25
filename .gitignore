@@ -50,3 +50,5 @@ app.*.map.json
 .firebase/
 
 tmp/
+*.mocks.dart
+coverage/

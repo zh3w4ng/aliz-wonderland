@@ -15,7 +15,6 @@ class StoryNewView extends StatefulWidget {
 
 class _StoryNewViewState extends State<StoryNewView> {
   final editorState = EditorState.blank(withInitialText: true);
-  final stories = FirebaseFirestore.instance.collection('stories');
   late AppStateProvider appStateProvider;
 
   @override
@@ -33,6 +32,8 @@ class _StoryNewViewState extends State<StoryNewView> {
               onPressed: () => showDialog(
                   context: context,
                   builder: (_) => PublishModal(
+                    username:  appStateProvider.appState.username(),
+                    stories: FirebaseFirestore.instance.collection('stories'),
                       docId: null,
                       document: editorState.document,
                       title: '',
