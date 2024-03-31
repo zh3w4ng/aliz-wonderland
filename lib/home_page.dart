@@ -23,7 +23,12 @@ import 'package:wonderland/typography.dart';
 import 'package:wonderland/footer.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, this.docId}) : super(key: key);
+  HomePage(
+      {Key? key,
+      this.docId,
+      required this.appStateProvider,
+      required this.stories})
+      : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -35,7 +40,8 @@ class HomePage extends StatefulWidget {
   // always marked "final".
 
   final String? docId;
-
+  final AppStateProvider appStateProvider;
+  final CollectionReference stories;
   @override
   State<HomePage> createState() => _HomePageState();
 }
@@ -44,8 +50,6 @@ class _HomePageState extends State<HomePage> {
   bool _navigationRailVisible = false;
   final NavigationRailLabelType labelType = NavigationRailLabelType.all;
   final double groupAlignment = -1.0;
-  final stories = FirebaseFirestore.instance.collection('stories');
-  late AppStateProvider appStateProvider;
   late FirebaseAnalytics? analytics;
 
   Widget _selectNavigationIndex(AppState appState) {
@@ -57,18 +61,18 @@ class _HomePageState extends State<HomePage> {
     switch (appState.navigationIndex) {
       case null:
         if (appState.docId == null) {
-          return StoryNewView(stories: stories);
+          return StoryNewView(stories: widget.stories);
         } else if (appState.editable) {
-          return StoryEditView(docId: appState.docId!, stories: stories);
+          return StoryEditView(docId: appState.docId!, stories: widget.stories);
         } else {
           analytics?.logScreenView(screenName: 'Story Show');
           analytics?.logViewItem(parameters: {'id': appState.docId});
-          return StoryShowView(docId: appState.docId!, stories: stories);
+          return StoryShowView(docId: appState.docId!, stories: widget.stories);
         }
       case 2:
         analytics?.logScreenView(screenName: 'Story List');
         analytics?.logViewItemList();
-        return StoriesList(stories: stories);
+        return StoriesList(stories: widget.stories);
       case 1:
         analytics?.logScreenView(screenName: 'Experience');
         return const ExperienceCards();
@@ -103,11 +107,11 @@ class _HomePageState extends State<HomePage> {
                 final Map node = json
                     .decode(utf8.decode(result.files.single.bytes!.toList()));
                 try {
-                  stories.add({
+                  widget.stories.add({
                     'doc': node['doc'],
                     'creadedAt': DateTime.now(),
                     'updatedAt': DateTime.now(),
-                    'updatedBy': appStateProvider.appState.username(),
+                    'updatedBy': widget.appStateProvider.appState.username(),
                     'published': true,
                     'title': node['title'],
                     'summary': node['summary'],
@@ -131,7 +135,7 @@ class _HomePageState extends State<HomePage> {
             });
         }
       },
-      itemBuilder: (context) => appStateProvider.appState.loggedIn()
+      itemBuilder: (context) => widget.appStateProvider.appState.loggedIn()
           ? [
               const PopupMenuItem(
                   value: 'logout',
@@ -177,16 +181,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    appStateProvider = Provider.of<AppStateProvider>(context);
     if (MediaQuery.of(context).size.width > 600) {
       _navigationRailVisible = true;
     }
     if (widget.docId != null) {
-      appStateProvider.goToStory(docId: widget.docId, editable: false);
+      widget.appStateProvider.goToStory(docId: widget.docId, editable: false);
     }
     return Scaffold(
       appBar: AppBar(
-        leading: appStateProvider.appState.navigationIndex != null
+        leading: widget.appStateProvider.appState.navigationIndex != null
             ? (MediaQuery.of(context).size.width > 600
                 ? const SizedBox()
                 : IconButton(
@@ -197,20 +200,20 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () => setState(() =>
                         _navigationRailVisible = !_navigationRailVisible)))
             : IconButton(
-                onPressed: () => appStateProvider.goToNonStory(tab: 'stories'),
+                onPressed: () => widget.appStateProvider.goToNonStory(tab: 'stories'),
                 icon: const Icon(Icons.arrow_back)),
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           IconButton(
-              onPressed: () => appStateProvider.goToNonStory(tab: 'home'),
+              onPressed: () => widget.appStateProvider.goToNonStory(tab: 'home'),
               icon: SvgPicture.asset('assets/icons/zw-logo.svg',
                   colorFilter: ColorFilter.mode(
                     Theme.of(context).colorScheme.primary,
                     BlendMode.srcATop,
                   ))),
           const SizedBox(width: 8),
-          Text(appStateProvider.appState.title,
+          Text(widget.appStateProvider.appState.title,
               style: TypographyUtil.titleLarge(context))
         ]),
       ),
@@ -220,15 +223,15 @@ class _HomePageState extends State<HomePage> {
             child: Visibility(
                 visible: _navigationRailVisible,
                 child: NavigationRail(
-                    selectedIndex: appStateProvider.appState.navigationIndex,
+                    selectedIndex: widget.appStateProvider.appState.navigationIndex,
                     groupAlignment: groupAlignment,
                     onDestinationSelected: (int index) =>
-                        appStateProvider.goToNonStory(index: index),
+                        widget.appStateProvider.goToNonStory(index: index),
                     labelType: labelType,
-                    leading: appStateProvider.appState.loggedIn()
+                    leading: widget.appStateProvider.appState.loggedIn()
                         ? FloatingActionButton(
                             elevation: 0,
-                            onPressed: () => appStateProvider.goToStory(
+                            onPressed: () => widget.appStateProvider.goToStory(
                                 docId: null, editable: true),
                             child: const Icon(Icons.add),
                           )
@@ -240,11 +243,11 @@ class _HomePageState extends State<HomePage> {
                 padding: MediaQuery.of(context).size.width > 600
                     ? const EdgeInsets.symmetric(horizontal: 40)
                     : const EdgeInsets.symmetric(horizontal: 20),
-                child: _selectNavigationIndex(appStateProvider.appState))),
+                child: _selectNavigationIndex(widget.appStateProvider.appState))),
       ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          appStateProvider.toggleThemeMode(
+          widget.appStateProvider.toggleThemeMode(
               Theme.of(context).brightness == Brightness.light);
         },
         tooltip: Theme.of(context).brightness == Brightness.dark

@@ -32,7 +32,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  final AppStateProvider _appStateProvider = AppStateProvider(auth: FirebaseAuth.instance, appState: AppState());
+  final AppStateProvider _appStateProvider =
+      AppStateProvider(auth: FirebaseAuth.instance, appState: AppState());
 
   @override
   Widget build(BuildContext context) {
@@ -50,11 +51,19 @@ class _MyAppState extends State<MyApp> {
             routerConfig: GoRouter(initialLocation: '/', routes: [
               GoRoute(
                   path: '/',
-                  builder: (context, routerState) => const HomePage()),
+                  builder: (context, routerState) => HomePage(
+                        stories:
+                            FirebaseFirestore.instance.collection('stories'),
+                        appStateProvider: _appStateProvider,
+                      )),
               GoRoute(
                   path: '/story/:id',
-                  builder: (context, routerState) =>
-                      HomePage(docId: routerState.pathParameters['id'])),
+                  builder: (context, routerState) => HomePage(
+                        docId: routerState.pathParameters['id'],
+                        stories:
+                            FirebaseFirestore.instance.collection('stories'),
+                        appStateProvider: _appStateProvider,
+                      )),
             ]),
           );
         });
