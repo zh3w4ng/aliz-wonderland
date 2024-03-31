@@ -6,8 +6,6 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 
-import 'package:wonderland/app_state_provider.dart';
-import 'package:wonderland/app_state.dart';
 import 'package:wonderland/appflowy_editor.dart';
 import 'package:wonderland/companies_swiper.dart';
 import 'package:wonderland/experience_cards.dart';
@@ -15,13 +13,11 @@ import 'package:wonderland/home_page.dart';
 import 'package:wonderland/footer.dart';
 import 'package:wonderland/main.dart';
 import 'package:wonderland/name_card.dart';
-import 'package:wonderland/stories_list.dart';
 import 'package:wonderland/story_edit_view.dart';
 import 'package:wonderland/story_new_view.dart';
 import 'package:wonderland/story_show_view.dart';
 import 'package:wonderland/tools_word_cloud.dart';
 import 'package:wonderland/typography.dart';
-import 'package:wonderland/theme.dart';
 
 void main() {
   

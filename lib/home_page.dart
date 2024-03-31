@@ -57,18 +57,18 @@ class _HomePageState extends State<HomePage> {
     switch (appState.navigationIndex) {
       case null:
         if (appState.docId == null) {
-          return const StoryNewView();
+          return StoryNewView(stories: stories);
         } else if (appState.editable) {
-          return StoryEditView(docId: appState.docId!);
+          return StoryEditView(docId: appState.docId!, stories: stories);
         } else {
           analytics?.logScreenView(screenName: 'Story Show');
           analytics?.logViewItem(parameters: {'id': appState.docId});
-          return StoryShowView(docId: appState.docId!);
+          return StoryShowView(docId: appState.docId!, stories: stories);
         }
       case 2:
         analytics?.logScreenView(screenName: 'Story List');
         analytics?.logViewItemList();
-        return const StoriesList();
+        return StoriesList(stories: stories);
       case 1:
         analytics?.logScreenView(screenName: 'Experience');
         return const ExperienceCards();
@@ -223,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                     selectedIndex: appStateProvider.appState.navigationIndex,
                     groupAlignment: groupAlignment,
                     onDestinationSelected: (int index) =>
-                        appStateProvider.navigate(index: index),
+                        appStateProvider.goToNonStory(index: index),
                     labelType: labelType,
                     leading: appStateProvider.appState.loggedIn()
                         ? FloatingActionButton(

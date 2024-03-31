@@ -3,41 +3,47 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:wonderland/app_state.dart';
 
 class AppStateProvider extends ChangeNotifier {
-  AppStateProvider({required this.auth}) : super();
+  AppStateProvider({required this.auth, required this.appState}) : super();
 
   final FirebaseAuth auth;
-  AppState appState = AppState();
+  final AppState appState;
 
   void toggleThemeMode(bool dark) {
     appState.themeMode = dark ? ThemeMode.dark : ThemeMode.light;
     notifyListeners();
   }
 
-  void navigate({required int? index, String? docId, bool? editable}) {
+  void _navigate({required int? index, String? docId, bool? editable}) {
     appState.navigationIndex = index;
     appState.docId = docId;
     appState.editable = editable ?? false;
     notifyListeners();
   }
 
-  void goToNonStory({required String tab}) {
-    switch (tab) {
+  void goToNonStory({String? tab, int? index}) {
+    final mapping = {
+      0: 'home',
+      1: 'experience',
+      2: 'stories'
+    };
+    final tabName = tab ?? (mapping[index] ?? 'default');
+    switch (tabName) {
       case 'home':
-        navigate(index: 0);
+        _navigate(index: 0);
         break;
       case 'experience':
-        navigate(index: 1);
+        _navigate(index: 1);
         break;
       case 'stories':
-        navigate(index: 2);
+        _navigate(index: 2);
         break;
       default:
-        navigate(index: 0);
+        _navigate(index: 0);
     }
   }
 
   void goToStory({required String? docId, required bool editable}) {
-    navigate(index: null, docId: docId, editable: editable);
+    _navigate(index: null, docId: docId, editable: editable);
   }
 
   Future<String> logIn({required String email, required String password}) {
