@@ -11,17 +11,16 @@ import 'package:wonderland/footer.dart';
 import 'package:wonderland/typography.dart';
 
 class StoryEditView extends StatefulWidget {
-  const StoryEditView({super.key, required this.docId});
+  const StoryEditView({super.key, required this.docId, required this.stories});
 
   final String docId;
+  final CollectionReference stories;
 
   @override
   State<StoryEditView> createState() => _StoryEditViewState();
 }
 
 class _StoryEditViewState extends State<StoryEditView> {
-  final CollectionReference stories =
-      FirebaseFirestore.instance.collection('stories');
   late AppStateProvider appStateProvider;
   EditorState editorState = EditorState.blank(withInitialText: true);
 
@@ -34,7 +33,7 @@ class _StoryEditViewState extends State<StoryEditView> {
     String? ts = null;
 
     return FutureBuilder(
-        future: stories.doc(widget.docId).get(),
+        future: widget.stories.doc(widget.docId).get(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             title = snapshot.data!['title'];
@@ -57,11 +56,12 @@ class _StoryEditViewState extends State<StoryEditView> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                               IconButton(
+                                  key: const Key('iconbutton-publish'),
                                   tooltip: 'Publish',
                                   onPressed: () => showDialog(
                                       context: context,
                                       builder: (_) => PublishModal(
-                                            stories: stories,
+                                            stories: widget.stories,
                                             username: appStateProvider.appState
                                                 .username(),
                                             docId: widget.docId,
@@ -81,6 +81,7 @@ class _StoryEditViewState extends State<StoryEditView> {
                     Text(ts ?? '', style: TypographyUtil.labelSmall(context)),
                     const Spacer(),
                     IconButton(
+                        key: const Key('iconbutton-share'),
                         icon: const Icon(Icons.share),
                         onPressed: () {
                           Clipboard.setData(ClipboardData(
@@ -95,7 +96,7 @@ class _StoryEditViewState extends State<StoryEditView> {
                                   ))));
                         })
                   ]),
-                  url != null
+                  url != null && url!.isNotEmpty
                       ? SizedBox(
                           height: 250, child: Image(image: NetworkImage(url!)))
                       : const SizedBox(),
@@ -103,7 +104,8 @@ class _StoryEditViewState extends State<StoryEditView> {
                       height: 500,
                       child: AppFlowyEditor(
                           editorStyle: AppflowyEditorUtil.editorStyle(context),
-                          editable: appStateProvider.appState.loggedIn(),
+                          editable: appStateProvider.appState.loggedIn() &&
+                              appStateProvider.appState.editable,
                           editorState: editorState,
                           autoFocus: true,
                           characterShortcutEvents:

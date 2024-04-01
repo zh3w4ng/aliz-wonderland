@@ -8,17 +8,16 @@ import 'package:wonderland/footer.dart';
 import 'package:wonderland/typography.dart';
 
 class StoryShowView extends StatefulWidget {
-  const StoryShowView({super.key, required this.docId});
+  const StoryShowView({super.key, required this.docId, required this.stories});
 
   final String docId;
+  final CollectionReference stories;
 
   @override
   State<StoryShowView> createState() => _StoryShowViewState();
 }
 
 class _StoryShowViewState extends State<StoryShowView> {
-  final CollectionReference stories =
-      FirebaseFirestore.instance.collection('stories');
 
   EditorState editorState = EditorState.blank(withInitialText: true);
   String? title = null;
@@ -28,7 +27,7 @@ class _StoryShowViewState extends State<StoryShowView> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: stories.doc(widget.docId).get(),
+        future: widget.stories.doc(widget.docId).get(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             editorState =
@@ -52,6 +51,7 @@ class _StoryShowViewState extends State<StoryShowView> {
                     Text(ts ?? '', style: TypographyUtil.labelSmall(context)),
                     const Spacer(),
                     IconButton(
+                        key: const Key('iconbutton-share'),
                         icon: const Icon(Icons.share),
                         onPressed: () {
                           Clipboard.setData(ClipboardData(
@@ -65,7 +65,7 @@ class _StoryShowViewState extends State<StoryShowView> {
                                   ))));
                         })
                   ]),
-                  url != null
+                  url != null && url!.isNotEmpty
                       ? SizedBox(
                           height: 250, child: Image(image: NetworkImage(url!)))
                       : const SizedBox(),

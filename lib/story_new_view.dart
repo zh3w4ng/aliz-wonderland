@@ -7,7 +7,8 @@ import 'package:wonderland/appflowy_editor.dart';
 import 'package:wonderland/publish_modal.dart';
 
 class StoryNewView extends StatefulWidget {
-  const StoryNewView({super.key});
+  const StoryNewView({super.key, required this.stories});
+  final CollectionReference stories;
 
   @override
   State<StoryNewView> createState() => _StoryNewViewState();
@@ -21,26 +22,26 @@ class _StoryNewViewState extends State<StoryNewView> {
   Widget build(BuildContext context) {
     appStateProvider = Provider.of<AppStateProvider>(context);
 
-    if (!appStateProvider.appState.loggedIn()) {
-      appStateProvider.goToNonStory(tab: 'home');
-    }
     return ListView(
       children: [
-        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          IconButton(
-              tooltip: 'Publish',
-              onPressed: () => showDialog(
-                  context: context,
-                  builder: (_) => PublishModal(
-                    username:  appStateProvider.appState.username(),
-                    stories: FirebaseFirestore.instance.collection('stories'),
-                      docId: null,
-                      document: editorState.document,
-                      title: '',
-                      summary: '',
-                      heroImageUrl: '')),
-              icon: const Icon(Icons.publish)),
-        ]),
+        appStateProvider.appState.loggedIn()
+            ? Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                IconButton(
+                    key: const Key('iconbutton-publish'),
+                    tooltip: 'Publish',
+                    onPressed: () => showDialog(
+                        context: context,
+                        builder: (_) => PublishModal(
+                            username: appStateProvider.appState.username(),
+                            stories: widget.stories,
+                            docId: null,
+                            document: editorState.document,
+                            title: '',
+                            summary: '',
+                            heroImageUrl: '')),
+                    icon: const Icon(Icons.publish)),
+              ])
+            : const SizedBox(),
         SizedBox(
             width: double.infinity,
             height: 800,

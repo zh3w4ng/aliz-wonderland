@@ -24,7 +24,7 @@ class PublishModal extends StatefulWidget {
   String summary;
   String heroImageUrl;
   String? docId;
-  CollectionReference stories;
+  final CollectionReference stories;
   final formKey = GlobalKey<FormState>();
 
   @override

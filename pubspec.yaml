@@ -32,7 +32,11 @@ dependencies:
   provider: ^6.1.1
   card_swiper: ^3.0.0
   flutter_svg: ^2.0.9
-  word_cloud: ^1.0.1
+  word_cloud:
+    git:
+      url: https://github.com/zh3w4ng/word_cloud.git
+      ref: fix-type-error-double-to-int
+      path: word_cloud
   country_icons: ^3.0.0
   url_launcher: ^6.2.3
   timelines_plus: ^1.0.2
@@ -64,6 +68,7 @@ dev_dependencies:
   build_runner: ^2.4.8
   mockito: ^5.4.4
   firebase_auth_mocks: ^0.13.0
+  fake_cloud_firestore: ^2.4.8
   mock_exceptions: ^0.8.2
 
 # For information on the generic Dart part of this file, see the

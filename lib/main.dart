@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
+import 'package:wonderland/app_state.dart';
 import 'package:wonderland/theme.dart';
 import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/home_page.dart';
@@ -31,7 +32,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
-  final AppStateProvider _appStateProvider = AppStateProvider(auth: FirebaseAuth.instance);
+  final AppStateProvider _appStateProvider =
+      AppStateProvider(auth: FirebaseAuth.instance, appState: AppState());
 
   @override
   Widget build(BuildContext context) {
@@ -49,11 +51,19 @@ class _MyAppState extends State<MyApp> {
             routerConfig: GoRouter(initialLocation: '/', routes: [
               GoRoute(
                   path: '/',
-                  builder: (context, routerState) => const HomePage()),
+                  builder: (context, routerState) => HomePage(
+                        stories:
+                            FirebaseFirestore.instance.collection('stories'),
+                        appStateProvider: _appStateProvider,
+                      )),
               GoRoute(
                   path: '/story/:id',
-                  builder: (context, routerState) =>
-                      HomePage(docId: routerState.pathParameters['id'])),
+                  builder: (context, routerState) => HomePage(
+                        docId: routerState.pathParameters['id'],
+                        stories:
+                            FirebaseFirestore.instance.collection('stories'),
+                        appStateProvider: _appStateProvider,
+                      )),
             ]),
           );
         });

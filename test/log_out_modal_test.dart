@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:wonderland/app_state.dart';
 import 'package:wonderland/app_state_provider.dart';
 import 'package:wonderland/log_out_modal.dart';
 import 'log_out_modal_test.mocks.dart';
@@ -22,7 +23,7 @@ void main() {
     return MaterialApp(
         title: 'Firestore Example',
         home: ChangeNotifierProvider(
-            create: (context) => AppStateProvider(auth: auth),
+            create: (context) => AppStateProvider(auth: auth, appState: AppState()),
             builder: (context, _) => Scaffold(body: LogOutModal())));
   }
 
