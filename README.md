@@ -3,6 +3,8 @@
 
 A new Flutter project and perosnal website: [aliz-in-wonderland.com](aliz-in-wonderland.com)
 
+![image](https://github.com/zh3w4ng/aliz-wonderland/assets/5644573/09b08c6b-77df-401e-87cf-7ed7d3043d00)
+
 ## Getting Started
 
 This project is a Flutter-based personal website. It serves as a template for customization.
