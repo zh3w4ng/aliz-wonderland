@@ -17,5 +17,6 @@ This project is a Flutter-based personal website. It serves as a template for cu
 - Firebase hosting: [https://firebase.google.com](https://firebase.google.com)
 - Github Actions for automated deployment of Preview (PR) and Live (Main branch merge) versions: [https://firebase.google.com/docs/hosting/github-integration](https://firebase.google.com/docs/hosting/github-integration)
 
-## What's more
-If you find any issue, feel free to fire a bug report [here](https://github.com/zh3w4ng/aliz-wonderland/issues)
+## Updated At
+27 April 2024
+
