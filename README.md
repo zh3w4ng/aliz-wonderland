@@ -18,5 +18,5 @@ This project is a Flutter-based personal website. It serves as a template for cu
 - Github Actions for automated deployment of Preview (PR) and Live (Main branch merge) versions: [https://firebase.google.com/docs/hosting/github-integration](https://firebase.google.com/docs/hosting/github-integration)
 
 ## Updated At
-27 April 2024
+5 May 2024
 
