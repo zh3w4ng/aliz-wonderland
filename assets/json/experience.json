@@ -9,13 +9,15 @@
       "maintain a legacy Web App based on Postgresql, Clojure and Ruby on Rails",
       "automate local k8s dev environment with Tilt",
       "abstract Parquet serialzation away with Iceberg in Glue Data Catalog",
-      "build a new data pipeline with Kafka and Flink on K8s",
-      "support Data Science team with AWS Glue Spark"
+      "build a new streaming pipeline with Kafka and Flink on K8s",
+      "set up a new batch pipeline with DBT and Airflow on K8s"
     ],
     "keywords": [
+      "Airflow",
       "AWS",
       "Avro",
       "Clojure",
+      "DBT",
       "Flink",
       "Glue",
       "Iceberg",
@@ -27,7 +29,7 @@
     ]
   },
   {
-    "title": "Data Engineer",
+    "title": "Data Engineering Lead",
     "logo": "assets/icons/companies/money-hero-logo.svg",
     "from": "Jul '21 ",
     "to": "Aug '22",
