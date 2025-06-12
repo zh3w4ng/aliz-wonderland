@@ -101,7 +101,7 @@ class _NameCardState extends State<NameCard> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SvgPicture.asset('assets/icons/badge.svg',
+                    SvgPicture.asset('assets/icons/badge_13.svg',
                         colorFilter: ColorFilter.mode(
                             Theme.of(context).colorScheme.secondary,
                             BlendMode.srcIn)),
