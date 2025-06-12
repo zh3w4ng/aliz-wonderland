@@ -3,7 +3,8 @@
 
 A new Flutter project and perosnal website: [aliz-in-wonderland.com](aliz-in-wonderland.com)
 
-![image](https://github.com/zh3w4ng/aliz-wonderland/assets/5644573/09b08c6b-77df-401e-87cf-7ed7d3043d00)
+<img width="827" alt="Screenshot 2025-06-12 at 9 35 46 AM" src="https://github.com/user-attachments/assets/b393f291-469e-477f-9edd-ba65ca1a5240" />
+
 
 ## Getting Started
 
@@ -18,5 +19,5 @@ This project is a Flutter-based personal website. It serves as a template for cu
 - Github Actions for automated deployment of Preview (PR) and Live (Main branch merge) versions: [https://firebase.google.com/docs/hosting/github-integration](https://firebase.google.com/docs/hosting/github-integration)
 
 ## Updated At
-12 May 2024
+12 June 2025
 
