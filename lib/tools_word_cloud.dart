@@ -11,6 +11,9 @@ class ToolsWordCloud extends StatelessWidget {
   Widget build(BuildContext context) {
     double radius = 160;
     WordCloudData wcData = WordCloudData(data: [
+      {'word': 'Airflow', 'value': 70},
+      {'word': 'DBT', 'value': 70},
+      {'word': 'Iceberg', 'value': 70},
       {'word': 'AWS', 'value': 90},
       {'word': 'Docker', 'value': 90},
       {'word': 'Flutter', 'value': 80},
