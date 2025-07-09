@@ -1,7 +1,7 @@
 # wonderland
 [![codecov](https://codecov.io/github/zh3w4ng/aliz-wonderland/graph/badge.svg?token=PNNQRUUEVI)](https://codecov.io/github/zh3w4ng/aliz-wonderland)
 
-A new Flutter project and perosnal website: [aliz-in-wonderland.com](aliz-in-wonderland.com)
+A new Flutter project and perosnal website: [aliz-in-wonderland.com](https://aliz-in-wonderland.com)
 
 <img width="827" alt="Screenshot 2025-06-12 at 9 35 46 AM" src="https://github.com/user-attachments/assets/b393f291-469e-477f-9edd-ba65ca1a5240" />
 
